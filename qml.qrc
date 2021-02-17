@@ -53,5 +53,8 @@
         <file>images/temp.png</file>
         <file>images/temperature.png</file>
         <file>images/yellolamp.png</file>
+        <file>Page1Form.ui.qml</file>
+        <file>Page2Form.ui.qml</file>
+        <file>Page3Form.ui.qml</file>
     </qresource>
 </RCC>

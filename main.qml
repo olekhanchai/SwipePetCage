@@ -46,42 +46,12 @@ ApplicationWindow {
             id: swipeView
             Layout.preferredHeight: 400
             Layout.preferredWidth: 800
+            currentIndex: 1
 
-            Item {
-                TextInput {
-                    id: textInput
-                    x: 159
-                    y: 45
-                    width: 80
-                    height: 20
-                    text: qsTr("Maru-san")
-                    font.pixelSize: 16
-                }
+            Page1Form{}
+            Page2Form{}
+            Page3Form{}
 
-                Text {
-                    id: lblPetName
-                    x: 91
-                    y: 45
-                    text: qsTr("PetName")
-                    font.pixelSize: 16
-                    minimumPointSize: 16
-                    minimumPixelSize: 16
-                    rotation: 0.665
-                }
-            }
-
-            Item {
-                Text {
-                    id: lblShiro
-                    x: 91
-                    y: 45
-                    text: qsTr("Shiro")
-                    font.pixelSize: 16
-                    minimumPointSize: 16
-                    minimumPixelSize: 16
-                    rotation: 0.665
-                }
-            }
         }
 
         Row {
