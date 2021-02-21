@@ -1,16 +1,16 @@
 import QtQuick 2.11
-import QtQuick.Controls 2.4
+import QtQuick.Controls 2.2
 
 Page {
-    width: 800
-    height: 400
+    width: screenWidth
+    height: screenHight - (screenHight / 6)
 
     Grid {
         id: grid
         x: 0
         y: 0
-        width: 800
-        height: 400
+        width: screenWidth
+        height: screenHight - (screenHight / 6)
         Image {
             id: imageTemp
             width: grid.width / 2

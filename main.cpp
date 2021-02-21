@@ -3,7 +3,9 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQmlContext>
-#include "mserialport.h"
+#include <QSize>
+#include <QScreen>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
@@ -15,12 +17,13 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    QScopedPointer<MSerialPort> serial(new MSerialPort);
-
     QQmlApplicationEngine engine;
 
+    QSize screenSize = QGuiApplication::primaryScreen()->size();
+
     engine.rootContext()->setContextProperty("applicationDirPath", QGuiApplication::applicationDirPath());
-    engine.rootContext()->setContextProperty("serial", serial.data());
+    engine.rootContext()->setContextProperty("screenWidth", screenSize.width() > screenSize.height() ? screenSize.width() : screenSize.height());
+    engine.rootContext()->setContextProperty("screenHight", screenSize.width() > screenSize.height() ? screenSize.height() : screenSize.width());
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

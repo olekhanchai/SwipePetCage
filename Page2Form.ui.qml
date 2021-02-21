@@ -1,5 +1,5 @@
 import QtQuick 2.11
-import QtQuick.Controls 2.4
+import QtQuick.Controls 2.2
 
 Page {
     width: 800
@@ -9,8 +9,8 @@ Page {
         id: grid
         x: 0
         y: 0
-        width: 800
-        height: 400
+        width: screenWidth
+        height: screenHight - ( screenHight / 6 )
 
         Image {
             id: imageTemp
@@ -46,19 +46,19 @@ Page {
 
             Image {
                 id: imageTempCircle
-                x: 31
-                y: 33
-                width: 156
-                height: 135
+                x: imageTemp.width / 6
+                y: imageTemp.height / 2
+                width: imageTemp.height * (2/3)
+                height: imageTemp.height * (2/3)
                 source: "images/red.png"
                 fillMode: Image.PreserveAspectFit
 
                 Image {
                     id: imageTempIcon
-                    x: 54
-                    y: 45
-                    width: 49
-                    height: 45
+                    x: imageTemp.width / 6
+                    y: imageTemp.height / 2
+                    width: imageTemp.height / 4
+                    height: imageTemp.height / 4
                     source: "images/temp.png"
                     fillMode: Image.PreserveAspectFit
                 }

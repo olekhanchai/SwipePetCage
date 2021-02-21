@@ -1,12 +1,12 @@
 import QtQuick 2.11
-import QtQuick.Controls 2.4
-import QtQuick.VirtualKeyboard 2.4
+import QtQuick.Controls 2.2
+import QtQuick.VirtualKeyboard 2.2
 import QtQuick.Layouts 1.0
 
 ApplicationWindow {
     id: window
-    width: 800
-    height: 480
+    width: screenWidth
+    height: screenHight
     visible: true
 
     InputPanel {
@@ -44,8 +44,8 @@ ApplicationWindow {
 
         SwipeView {
             id: swipeView
-            Layout.preferredHeight: 400
-            Layout.preferredWidth: 800
+            Layout.preferredHeight: screenHight - (screenHight / 6)
+            Layout.preferredWidth: screenWidth
             currentIndex: 1
 
             Page1Form{}
@@ -55,13 +55,13 @@ ApplicationWindow {
         }
 
         Row {
-            Layout.preferredHeight: 70
-            Layout.preferredWidth: 800
+            Layout.preferredHeight: (screenHight / 6)
+            Layout.preferredWidth: screenWidth
             spacing: 10
 
             Text {
                 id: lblStatus
-                height: 60
+                height: screenHight / 6
                 text: qsTr("Normal Running State")
                 font.pixelSize: 20
                 horizontalAlignment: Text.AlignHCenter
@@ -73,15 +73,15 @@ ApplicationWindow {
 
             RoundButton {
                 id: btnFan
-                width: 60
-                height: 60
+                width: screenHight / 10
+                height: screenHight / 10
                 padding: 0
                 rightPadding: 0
                 bottomPadding: 0
                 topPadding: 0
                 icon.color: "transparent"
-                icon.width: 80
-                icon.height: 80
+                icon.width: screenHight / 10
+                icon.height: screenHight / 10
                 icon.source: "images/offgreenfan.png"
                 onPressed: {
                     btnFan.icon.source = "file:///" + applicationDirPath + "/../images/greenfan.png"
@@ -93,15 +93,15 @@ ApplicationWindow {
 
             RoundButton {
                 id: btnPeltier
-                width: 60
-                height: 60
+                width: screenHight / 10
+                height: screenHight / 10
                 padding: 0
                 rightPadding: 0
                 bottomPadding: 0
                 topPadding: 0
                 icon.color: "transparent"
-                icon.width: 80
-                icon.height: 80
+                icon.width: screenHight / 10
+                icon.height: screenHight / 10
                 icon.source: "images/offgreenice.png"
                 onPressed: {
                     btnPeltier.icon.source = "file:///" + applicationDirPath + "/../images/greenice.png"
@@ -113,15 +113,15 @@ ApplicationWindow {
 
             RoundButton {
                 id: btnNeoPixel
-                width: 60
-                height: 60
+                width: screenHight / 10
+                height: screenHight / 10
                 padding: 0
                 rightPadding: 0
                 bottomPadding: 0
                 topPadding: 0
                 icon.color: "transparent"
-                icon.width: 80
-                icon.height: 80
+                icon.width: screenHight / 10
+                icon.height: screenHight / 10
                 icon.source: "images/offneopixel.png"
                 onPressed: {
                     btnNeoPixel.icon.source = "file:///" + applicationDirPath + "/../images/neopixel.png"
@@ -133,15 +133,15 @@ ApplicationWindow {
 
             RoundButton {
                 id: btnLamp
-                width: 60
-                height: 60
+                width: screenHight / 10
+                height: screenHight / 10
                 padding: 0
                 rightPadding: 0
                 bottomPadding: 0
                 topPadding: 0
                 icon.color: "transparent"
-                icon.width: 80
-                icon.height: 80
+                icon.width: screenHight / 10
+                icon.height: screenHight / 10
                 icon.source: "images/offlamp.png"
                 onPressed: {
                     btnLamp.icon.source = "file:///" + applicationDirPath + "/../images/yellolamp.png"
@@ -153,19 +153,18 @@ ApplicationWindow {
 
             RoundButton {
                 id: btnPlug
-                width: 60
-                height: 60
+                width: screenHight / 10
+                height: screenHight / 10
                 padding: 0
                 rightPadding: 0
                 bottomPadding: 0
                 topPadding: 0
                 icon.color: "transparent"
-                icon.width: 80
-                icon.height: 80
+                icon.width: screenHight / 10
+                icon.height: screenHight / 10
                 icon.source: "images/offplug.png"
                 onPressed: {
                     btnPlug.icon.source = "file:///" + applicationDirPath + "/../images/plug.png"
-                    serial.sendCommand("P50", 0, false);
                 }
                 onReleased: {
                     btnPlug.icon.source = "file:///" + applicationDirPath + "/../images/offplug.png"
@@ -174,7 +173,7 @@ ApplicationWindow {
 
             Text {
                 id: lblDateTime
-                height: 60
+                height: screenHight / 10
                 font.pixelSize: 20
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter

@@ -1,10 +1,9 @@
 import QtQuick 2.11
-import QtQuick.Controls 2.4
-import QtCharts 2.15
+import QtQuick.Controls 2.2
 
 Page {
-    width: 800
-    height: 400
+    width: screenWidth
+    height: screenHight - (screenHight / 6)
 
     Rectangle {
         id: rectangle2
