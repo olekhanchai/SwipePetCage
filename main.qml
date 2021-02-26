@@ -58,7 +58,6 @@ ApplicationWindow {
             Layout.preferredHeight: screenHight * 0.15
             Layout.preferredWidth: screenWidth
             spacing: 10
-            anchors.left: parent.left
             Text {
                 id: lblStatus
                 height: statusBar.height  - (statusBar.height * 0.25) / 2
@@ -174,7 +173,7 @@ ApplicationWindow {
                         btnPlug.icon.source = "file:///" + applicationDirPath + "/../images/offplug.png"
                     }
                     onClicked: {
-                        request('http://192.168.1.45:8080/command?data=UDYwIFIxIFQw', function (o) {
+                        request('http://192.168.1.46:8080/command?data=UDYwIFIxIFQw', function (o) {
 
                                                 // log the json response
                                                 console.log(o.responseText);
@@ -232,6 +231,14 @@ ApplicationWindow {
         })(xhr);
         xhr.open('GET', url, true);
         xhr.send('');
+    }
+    Timer {
+       interval: 60000
+       running: true
+       repeat: true
+       onTriggered: {
+            console.log("save data to database server")
+       }
     }
 }
 
