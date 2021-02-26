@@ -44,137 +44,160 @@ ApplicationWindow {
 
         SwipeView {
             id: swipeView
-            Layout.preferredHeight: screenHight - (screenHight / 6)
+            Layout.preferredHeight: screenHight * 0.85
             Layout.preferredWidth: screenWidth
             currentIndex: 1
 
-            Page1Form{}
-            Page2Form{}
-            Page3Form{}
+            Page1{}
+            Page2{}
+            Page3{}
 
         }
-
         Row {
-            Layout.preferredHeight: (screenHight / 6)
+            id: statusBar
+            Layout.preferredHeight: screenHight * 0.15
             Layout.preferredWidth: screenWidth
             spacing: 10
-
+            anchors.left: parent.left
             Text {
                 id: lblStatus
-                height: screenHight / 6
+                height: statusBar.height  - (statusBar.height * 0.25) / 2
                 text: qsTr("Normal Running State")
-                font.pixelSize: 20
+                font.pixelSize: statusBar.height * 0.25
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
+                anchors.left: parent.left
                 rightPadding: 10
                 leftPadding: 10
                 textFormat: Text.PlainText
             }
+            Row {
+                id: iconBar
+                x: (screenWidth - iconBar.width) * 0.5
+                spacing: 10
+                RoundButton {
+                    id: btnFan
+                    width: statusBar.height * 0.85
+                    height: statusBar.height * 0.85
+                    padding: 0
+                    rightPadding: 0
+                    bottomPadding: 0
+                    topPadding: 0
+                    icon.color: "transparent"
+                    icon.width: statusBar.height * 0.85
+                    icon.height: statusBar.height * 0.85
+                    icon.source: "images/offgreenfan.png"
+                    onPressed: {
+                        btnFan.icon.source = "file:///" + applicationDirPath + "/../images/greenfan.png"
+                    }
+                    onReleased: {
+                        btnFan.icon.source = "file:///" + applicationDirPath + "/../images/offgreenfan.png"
+                    }
+                }
 
-            RoundButton {
-                id: btnFan
-                width: screenHight / 10
-                height: screenHight / 10
-                padding: 0
-                rightPadding: 0
-                bottomPadding: 0
-                topPadding: 0
-                icon.color: "transparent"
-                icon.width: screenHight / 10
-                icon.height: screenHight / 10
-                icon.source: "images/offgreenfan.png"
-                onPressed: {
-                    btnFan.icon.source = "file:///" + applicationDirPath + "/../images/greenfan.png"
+                RoundButton {
+                    id: btnPeltier
+                    width: statusBar.height * 0.85
+                    height: statusBar.height * 0.85
+                    padding: 0
+                    rightPadding: 0
+                    bottomPadding: 0
+                    topPadding: 0
+                    icon.color: "transparent"
+                    icon.width: statusBar.height * 0.85
+                    icon.height: statusBar.height * 0.85
+                    icon.source: "images/offgreenice.png"
+                    onPressed: {
+                        btnPeltier.icon.source = "file:///" + applicationDirPath + "/../images/greenice.png"
+                    }
+                    onReleased: {
+                        btnPeltier.icon.source = "file:///" + applicationDirPath + "/../images/offgreenice.png"
+                    }
                 }
-                onReleased: {
-                    btnFan.icon.source = "file:///" + applicationDirPath + "/../images/offgreenfan.png"
-                }
-            }
 
-            RoundButton {
-                id: btnPeltier
-                width: screenHight / 10
-                height: screenHight / 10
-                padding: 0
-                rightPadding: 0
-                bottomPadding: 0
-                topPadding: 0
-                icon.color: "transparent"
-                icon.width: screenHight / 10
-                icon.height: screenHight / 10
-                icon.source: "images/offgreenice.png"
-                onPressed: {
-                    btnPeltier.icon.source = "file:///" + applicationDirPath + "/../images/greenice.png"
+                RoundButton {
+                    id: btnNeoPixel
+                    width: statusBar.height * 0.85
+                    height: statusBar.height * 0.85
+                    padding: 0
+                    rightPadding: 0
+                    bottomPadding: 0
+                    topPadding: 0
+                    icon.color: "transparent"
+                    icon.width: statusBar.height * 0.85
+                    icon.height: statusBar.height * 0.85
+                    icon.source: "images/offneopixel.png"
+                    onPressed: {
+                        btnNeoPixel.icon.source = "file:///" + applicationDirPath + "/../images/neopixel.png"
+                    }
+                    onReleased: {
+                        btnNeoPixel.icon.source = "file:///" + applicationDirPath + "/../images/offneopixel.png"
+                    }
                 }
-                onReleased: {
-                    btnPeltier.icon.source = "file:///" + applicationDirPath + "/../images/offgreenice.png"
-                }
-            }
 
-            RoundButton {
-                id: btnNeoPixel
-                width: screenHight / 10
-                height: screenHight / 10
-                padding: 0
-                rightPadding: 0
-                bottomPadding: 0
-                topPadding: 0
-                icon.color: "transparent"
-                icon.width: screenHight / 10
-                icon.height: screenHight / 10
-                icon.source: "images/offneopixel.png"
-                onPressed: {
-                    btnNeoPixel.icon.source = "file:///" + applicationDirPath + "/../images/neopixel.png"
+                RoundButton {
+                    id: btnLamp
+                    width: statusBar.height * 0.85
+                    height: statusBar.height * 0.85
+                    padding: 0
+                    rightPadding: 0
+                    bottomPadding: 0
+                    topPadding: 0
+                    icon.color: "transparent"
+                    icon.width: statusBar.height * 0.85
+                    icon.height: statusBar.height * 0.85
+                    icon.source: "images/offlamp.png"
+                    onPressed: {
+                        btnLamp.icon.source = "file:///" + applicationDirPath + "/../images/yellolamp.png"
+                    }
+                    onReleased: {
+                        btnLamp.icon.source = "file:///" + applicationDirPath + "/../images/offlamp.png"
+                    }
                 }
-                onReleased: {
-                    btnNeoPixel.icon.source = "file:///" + applicationDirPath + "/../images/offneopixel.png"
-                }
-            }
 
-            RoundButton {
-                id: btnLamp
-                width: screenHight / 10
-                height: screenHight / 10
-                padding: 0
-                rightPadding: 0
-                bottomPadding: 0
-                topPadding: 0
-                icon.color: "transparent"
-                icon.width: screenHight / 10
-                icon.height: screenHight / 10
-                icon.source: "images/offlamp.png"
-                onPressed: {
-                    btnLamp.icon.source = "file:///" + applicationDirPath + "/../images/yellolamp.png"
-                }
-                onReleased: {
-                    btnLamp.icon.source = "file:///" + applicationDirPath + "/../images/offlamp.png"
-                }
-            }
+                RoundButton {
+                    id: btnPlug
+                    width: statusBar.height * 0.85
+                    height: statusBar.height * 0.85
+                    padding: 0
+                    rightPadding: 0
+                    bottomPadding: 0
+                    topPadding: 0
+                    icon.color: "transparent"
+                    icon.width: statusBar.height * 0.85
+                    icon.height: statusBar.height * 0.85
+                    icon.source: "images/offplug.png"
+                    onPressed: {
+                        btnPlug.icon.source = "file:///" + applicationDirPath + "/../images/plug.png"
+                    }
+                    onReleased: {
+                        btnPlug.icon.source = "file:///" + applicationDirPath + "/../images/offplug.png"
+                    }
+                    onClicked: {
+                        request('http://192.168.1.45:8080/command?data=UDYwIFIxIFQw', function (o) {
 
-            RoundButton {
-                id: btnPlug
-                width: screenHight / 10
-                height: screenHight / 10
-                padding: 0
-                rightPadding: 0
-                bottomPadding: 0
-                topPadding: 0
-                icon.color: "transparent"
-                icon.width: screenHight / 10
-                icon.height: screenHight / 10
-                icon.source: "images/offplug.png"
-                onPressed: {
-                    btnPlug.icon.source = "file:///" + applicationDirPath + "/../images/plug.png"
-                }
-                onReleased: {
-                    btnPlug.icon.source = "file:///" + applicationDirPath + "/../images/offplug.png"
+                                                // log the json response
+                                                console.log(o.responseText);
+
+    //                                            // translate response into object
+    //                                            var d = eval('new Object(' + o.responseText + ')');
+
+    //                                            // access elements inside json object with dot notation
+    //                                            emailLabel.text = d.email
+    //                                            urlLabel.text = d.url
+    //                                            sinceLabel.text = d.since
+    //                                            bioLabel.text = d.bio
+
+                                            });
+                    }
                 }
             }
 
             Text {
                 id: lblDateTime
-                height: screenHight / 10
-                font.pixelSize: 20
+                height: statusBar.height  - (statusBar.height * 0.25) / 2
+                font.pixelSize: statusBar.height * 0.25
+                anchors.right: parent.right
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 rightPadding: 10
@@ -198,6 +221,17 @@ ApplicationWindow {
             }
 
         }
+    }
+    // this function is included locally, but you can also include separately via a header definition
+    function request(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = (function(myxhr) {
+            return function() {
+                callback(myxhr);
+            }
+        })(xhr);
+        xhr.open('GET', url, true);
+        xhr.send('');
     }
 }
 

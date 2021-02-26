@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
@@ -6,6 +7,8 @@
 #include <QSize>
 #include <QScreen>
 #include <QDebug>
+#include "qsplineseries.h"
+#include "qchartview.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,15 +18,15 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
 
-    QSize screenSize = QGuiApplication::primaryScreen()->size();
+    QSize screenSize = QApplication::primaryScreen()->size();
 
-    engine.rootContext()->setContextProperty("applicationDirPath", QGuiApplication::applicationDirPath());
+    engine.rootContext()->setContextProperty("applicationDirPath", QApplication::applicationDirPath());
     engine.rootContext()->setContextProperty("screenWidth", screenSize.width() > screenSize.height() ? screenSize.width() : screenSize.height());
-    engine.rootContext()->setContextProperty("screenHight", screenSize.width() > screenSize.height() ? screenSize.height() : screenSize.width());
+    engine.rootContext()->setContextProperty("screenHight", (screenSize.width() > screenSize.height() ? screenSize.height() : screenSize.width())*0.92);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

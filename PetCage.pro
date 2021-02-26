@@ -1,4 +1,4 @@
-QT += quick serialport charts
+QT += quick opengl charts virtualkeyboard
 
 CONFIG += c++11
 
