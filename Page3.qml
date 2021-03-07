@@ -149,24 +149,148 @@ Page {
     }
 
     ChartView {
-        id: chart
-        x: screenWidth * 0.05
+        id: tempChart
+        x: 0
         y: rectangleTemp.y
-        width: history.width * 0.9
-        height: history.height - imageTemp.height
+        z: 90
+
+        width: rectangleTemp.width * 0.5
+        height: (parent.height - rectangleO2.y) * 0.5
 
         SplineSeries {
-            id: spline
-            name: "SplineSeries"
-            XYPoint { x: 0; y: 0.0 }
-            XYPoint { x: 1.1; y: 3.2 }
-            XYPoint { x: 1.9; y: 2.4 }
-            XYPoint { x: 2.1; y: 2.1 }
-            XYPoint { x: 2.9; y: 2.6 }
-            XYPoint { x: 3.4; y: 2.3 }
-            XYPoint { x: 4.1; y: 3.1 }
+            id: splineTemp
+            name: "Temp ( °C )"
+            color: "#fa4040"
+            axisX: DateTimeAxis {
+                format: "HH:mm:ss"
+                tickCount: 10
+            }
+            axisY: ValueAxis {
+                min: 30
+                max: 31
+                tickCount: 5
+                labelFormat: "%.1f"
+            }
+        }
+    }
+
+    ChartView {
+        id: humidChart
+        x: rectangleTemp.width * 0.5
+        y: rectangleTemp.y
+        z: 90
+
+        width: rectangleTemp.width * 0.5
+        height: (parent.height - rectangleO2.y) * 0.5
+
+        SplineSeries {
+            id: splineHumid
+            name: "Humid ( \%RH )"
+            color: "#061a8f"
+            axisY: ValueAxis {
+                tickCount: 5
+                max: 61
+                min: 60
+                labelFormat: "%d"
+            }
+            axisX: DateTimeAxis {
+                tickCount: 10
+                format: "HH:mm:ss"
+            }
+        }
+    }
+
+    ChartView {
+        id: co2Chart
+        x: 0
+        y: tempChart.height + 80
+        z: 99
+        width: rectangleTemp.width * 0.5
+        height: (parent.height - rectangleO2.y) * 0.5
+        SplineSeries {
+            id: splineCO2
+            name: "CO2 ( ppm )"
+            color: "#c2b4b4"
+            axisY: ValueAxis {
+                tickCount: 5
+                max: 441
+                min: 440
+                labelFormat: "%d"
+            }
+            axisX: DateTimeAxis {
+                tickCount: 10
+                format: "HH:mm:ss"
+            }
+        }
+    }
+
+    ChartView {
+        id: o2Chart
+        x: rectangleTemp.width * 0.5
+        y: humidChart.height + 80
+        z: 99
+        width: rectangleTemp.width * 0.5
+        height: (parent.height - rectangleO2.y) * 0.5
+        SplineSeries {
+            id: splineO2
+            name: "O2 ( \% )"
+            color: "#05bf2f"
+            axisY: ValueAxis {
+                tickCount: 5
+                max: 55
+                min: 54
+                labelFormat: "%d"
+            }
+            axisX: DateTimeAxis {
+                tickCount: 10
+                format: "HH:mm:ss"
+            }
+        }
+    }
+
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        function lastMin() {
+            var my = new Date();
+            my.setMinutes(my.getMinutes()-1);
+            return(new Date(my));
         }
 
+        onTriggered: {
+
+            var plotYTemp = 25 + Math.random() * 10;
+            var plotYO2 = 20 + Math.random() * 50;
+            var plotYCO2 = 440 + Math.random() * 100;
+            var plotYHumid = 60 + Math.random() * 20;
+
+            var plotX = new Date();
+
+            splineTemp.axisX.min = lastMin();
+            splineTemp.axisX.max = new Date();
+            if (plotYTemp * 1.1 > splineTemp.axisY.max) splineTemp.axisY.max = plotYTemp * 1.1;
+            if (plotYTemp * 0.9 < splineTemp.axisY.min) splineTemp.axisY.min = plotYTemp * 0.9;
+            splineTemp.append(plotX, plotYTemp);
+
+            splineHumid.axisX.min = lastMin();
+            splineHumid.axisX.max = new Date();
+            if (plotYHumid * 1.1 > splineHumid.axisY.max) splineHumid.axisY.max = plotYHumid * 1.1;
+            if (plotYHumid * 0.9 < splineHumid.axisY.min) splineHumid.axisY.min = plotYHumid * 0.9;
+            splineHumid.append(plotX, plotYHumid);
+
+            splineCO2.axisX.min = lastMin();
+            splineCO2.axisX.max = new Date();
+            if (plotYCO2 * 1.1 > splineCO2.axisY.max) splineCO2.axisY.max = plotYCO2 * 1.1;
+            if (plotYCO2 * 0.9 < splineCO2.axisY.min) splineCO2.axisY.min = plotYCO2 * 0.9;
+            splineCO2.append(plotX, plotYCO2);
+
+            splineO2.axisX.min = lastMin();
+            splineO2.axisX.max = new Date();
+            if (plotYO2 * 1.1 > splineO2.axisY.max) splineO2.axisY.max = plotYO2 * 1.1;
+            if (plotYO2 * 0.9 < splineO2.axisY.min) splineO2.axisY.min = plotYO2 * 0.9;
+            splineO2.append(plotX, plotYO2);
+        }
     }
 }
 

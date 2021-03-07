@@ -61,7 +61,7 @@ Page {
                 id: textTemp
                 x: imageTemp.width * 0.5
                 y: imageTemp.height * 0.5 - (imageTemp.height * 0.1) / 2
-                text: qsTr("--.-- C")
+                text: qsTr("--.-- °C")
                 font.pixelSize: imageTemp.height * 0.1
             }
         }
@@ -232,19 +232,70 @@ Page {
        running: true
        repeat: true
        onTriggered: {
-            request('http://192.168.1.46:8080/command?data=UDUw', function (o) {
+            request('http://192.168.1.46:8080/command?data=UDQw', function (o) {
             console.log(o.responseText);
             var errorText = '';
-            // log the json response
-            if(o.responseText.includes("error")) {
-                var d = o.responseText.split(";");
-                var err = d[0].split(":");
-                errorText = err[err.length-1];
-                imageO2Circle.source = "images/error.png"
-                textO2.text = "00.00%";
-                lblStatus.text = errorText;
+
+//            if(o.responseText === "") {
+//                imageCO2Circle.source = "images/error.png"
+//                textCO2.text = "0000 PPM";
+//                imageO2Circle.source = "images/error.png"
+//                textO2.text = "00.00 %";
+//                imageTempCircle.source = "images/error.png"
+//                textTemp.text = "00.00 °C";
+//                imageHumidCircle.source = "images/error.png"
+//                textHumid.text = "00.00 %RH";
+//                lblStatus.text = "Server not responding.";
+//            }
+
+//            if(o.responseText.includes("error")) {
+//                var d = o.responseText.split(";");
+//                var err = d[0].split(":");
+//                errorText = err[err.length-1];
+//                imageO2Circle.source = "images/error.png"
+//                textO2.text = "00.00 %";
+//                lblStatus.text = errorText;
+//            }
+
+            if(o.responseText.includes("ok")) {
+                var buff = o.responseText.split(";");
+                var vals = buff[0].split(" ");
+                var co2 = vals[0].split(":")
+                var temp = vals[1].split(":");
+                var humid = vals[2].split(":");
+                imageCO2Circle.source = "images/gray.png"
+                textCO2.text = co2[1] + " PPM";
+                imageTempCircle.source = "images/red.png"
+                textTemp.text = temp[1] + " °C";
+                imageHumidCircle.source = "images/blue.png"
+                textHumid.text = humid[1] + " %RH";
+                lblStatus.text = "Normal State Running";
             }
+
            });
+
+//           request('http://192.168.1.46:8080/command?data=UDUw', function (o) {
+//           console.log(o.responseText);
+//           var errorText = '';
+//           if(o.responseText.includes("error")) {
+//               var d = o.responseText.split(";");
+//               var err = d[0].split(":");
+//               errorText = err[err.length-1];
+//               imageO2Circle.source = "images/error.png"
+//               textO2.text = "00.00 %";
+//               lblStatus.text = errorText;
+//           }
+
+//           if(o.responseText.includes("ok")) {
+//               var buff = o.responseText.split(";");
+//               var vals = buff[0].split(" ");
+//               var V = vals[0].split(":")
+//               var O2 = vals[1].split(":");
+//               imageO2Circle.source = "images/green.png"
+//               textO2.text = O2[1] + " %";
+//               lblStatus.text = "Normal State Running";
+//           }
+//          });
        }
     }
     // this function is included locally, but you can also include separately via a header definition
