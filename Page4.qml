@@ -1,7 +1,7 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.2
 import QtCharts 2.3
-import QtMultimedia 5.0
+import QtWebView 1.1
 
 Page {
     id: history
@@ -39,36 +39,12 @@ Page {
         font.pixelSize: history.height * 0.075
     }
 
-    Camera {
-        id: camera
+    WebView {
+        id: webView
 
-        imageProcessing.whiteBalanceMode: CameraImageProcessing.WhiteBalanceFlash
-
-        exposure {
-            exposureCompensation: -1.0
-            exposureMode: Camera.ExposurePortrait
-        }
-
-        flash.mode: Camera.FlashRedEyeReduction
-
-        imageCapture {
-            onImageCaptured: {
-                photoPreview.source = preview  // Show the preview in an Image
-            }
-        }
+        width: 320
+        height: 240
+        url: "http://192.168.1.58/html"
     }
 
-    VideoOutput {
-        source: camera
-        anchors.bottomMargin: 10
-        anchors.rightMargin: 10
-        anchors.leftMargin: 10
-        anchors.topMargin: 65
-        anchors.fill: parent
-        focus : visible // to receive focus and capture key events when visible
-    }
-
-    Image {
-        id: photoPreview
-    }
 }

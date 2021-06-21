@@ -1,4 +1,4 @@
-QT += quick opengl charts virtualkeyboard
+QT += quick opengl charts webview
 
 CONFIG += c++11
 

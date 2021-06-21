@@ -9,15 +9,16 @@
 #include <QDebug>
 #include "qsplineseries.h"
 #include "qchartview.h"
+#include <QtWebView>
 
 int main(int argc, char *argv[])
 {
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
-    qputenv("QT_QPA_PLATFORM", "webgl:port=8998");
+    //qputenv("QT_QPA_PLATFORM", "webgl:port=8998");
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-
+    QtWebView::initialize();
     QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
