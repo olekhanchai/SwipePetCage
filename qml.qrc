@@ -58,5 +58,15 @@
         <file>Page3.qml</file>
         <file>images/error.png</file>
         <file>Page4.qml</file>
+        <file>images/ionic.png</file>
+        <file>images/uv.jpg</file>
+        <file>images/rgb.jpg</file>
+        <file>images/wheel.png</file>
+        <file>images/uv.png</file>
+        <file>images/fan.png</file>
+        <file>images/RGBbg.png</file>
+        <file>images/FANbg.png</file>
+        <file>images/IONbg.png</file>
+        <file>images/UVbg.png</file>
     </qresource>
 </RCC>

@@ -41,10 +41,11 @@ Page {
 
     WebView {
         id: webView
-
+        x: 150
+        y: 50
         width: 320
-        height: 240
-        url: "http://192.168.1.58/html"
+        height: 230
+        url: "http://192.168.1.49:4747/video";
     }
 
 }

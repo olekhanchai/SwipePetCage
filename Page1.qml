@@ -1,6 +1,5 @@
-import QtQuick 2.11
-import QtQuick.Controls 2.2
-import QtQuick.VirtualKeyboard 2.1
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 Page {
     width: screenWidth
@@ -18,116 +17,126 @@ Page {
             width: grid.width * 0.5
             height: grid.height * 0.5
             anchors.left: parent.left
-            anchors.top: parent.top
-            source: "images/temperature.png"
             anchors.leftMargin: 0
             anchors.topMargin: 0
-            sourceSize.height: grid.height * 0.5
-            sourceSize.width: grid.width * 0.5
-            layer.textureMirroring: ShaderEffectSource.NoMirroring
+            source: "images/RGBbg.png"
             fillMode: Image.Stretch
-
-            Image {
-                id: imageTempBar
-                x: imageTemp.width * 0.25
-                y: imageTemp.height * 0
-                width: imageTemp.width * 0.68
-                height: imageTemp.height * 1
-                source: "images/orangebar.png"
-                sourceSize.height: imageTemp.height * 1
-                sourceSize.width: imageTemp.width * 0.68
-                fillMode: Image.PreserveAspectFit
-            }
-
-            Image {
-                id: imageTempCircle
-                x: imageTemp.width * 0.15
-                y: imageTemp.height * 0.15
-                width: imageTemp.height * 0.7
-                height: imageTemp.height * 0.7
-                source: "images/red.png"
-                fillMode: Image.PreserveAspectFit
-                Image {
-                    id: imageTempIcon
-                    x: imageTempCircle.width * 0.5 - (imageTemp.height * 0.25) / 2
-                    y: imageTempCircle.height * 0.5 - (imageTemp.height * 0.25) / 2
-                    width: imageTemp.height * 0.25
-                    height: imageTemp.height * 0.25
-                    source: "images/temp.png"
-                    fillMode: Image.PreserveAspectFit
+            Button {
+                id: neo1
+                x: 0
+                y: 0
+                width: imageTemp.width / 3
+                height: imageTemp.height / 6
+                background: Rectangle {
+                        color: "#6068D5"
                 }
             }
-            Rectangle {
-                id: textTempUp
-                x: imageTemp.width * 0.5
-                y: imageTemp.height * 0.3
-                width: 100
-                height: imageTemp.height * 0.15
-                color: textInputTempUp.activeFocus ? "white" : "lightgray"
-
-                TextInput {
-                    id: textInputTempUp
-                    focus: true
-                    anchors.fill: parent
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    font.pixelSize: imageTemp.height * 0.1
-                    horizontalAlignment: Text.AlignRight
-                    verticalAlignment: Text.AlignVCenter
-                    inputMask: "99"
+            Button {
+                id: neo2
+                x: neo1.width
+                y: 0
+                width: imageTemp.width / 3
+                height: imageTemp.height / 6
+                background: Rectangle {
+                        color: "#D357DE"
                 }
-
             }
-
-            Text {
-                id: textTempUnitUp
-                x: textTempUp.x + textTempUp.width
-                y: imageTemp.height * 0.3
-                text: qsTr(" °C")
-                font.pixelSize: imageTemp.height * 0.1
-            }
-
-            Rectangle {
-                id: textTempDown
-                x: imageTemp.width * 0.5
-                y: imageTemp.height * 0.55
-                width: 100
-                height: imageTemp.height * 0.15
-                color: textInputTempDown.activeFocus ? "white" : "lightgray"
-
-                TextInput {
-                    id: textInputTempDown
-                    focus: true
-                    anchors.fill: parent
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    font.pixelSize: imageTemp.height * 0.1
-                    horizontalAlignment: Text.AlignRight
-                    verticalAlignment: Text.AlignVCenter
-                    inputMask: "99"
+            Button {
+                id: neo3
+                x: neo2.width + neo2.x
+                y: 0
+                width: imageTemp.width / 3
+                height: imageTemp.height / 6
+                background: Rectangle {
+                        color: "#CDF73E"
                 }
-
+            }
+            Button {
+                id: neo7
+                x: 0
+                y: imageTemp.height - neo1.height
+                width: imageTemp.width / 3
+                height: imageTemp.height / 6
+                background: Rectangle {
+                        color: "#0DFFFF"
+                }
+            }
+            Button {
+                id: neo8
+                x: neo7.width
+                y: imageTemp.height - neo1.height
+                width: imageTemp.width / 3
+                height: imageTemp.height / 6
+                background: Rectangle {
+                        color: "#FDFDFD"
+                }
+            }
+            Button {
+                id: neo9
+                x: neo8.width + neo8.x
+                y: imageTemp.height - neo1.height
+                width: imageTemp.width / 3
+                height: imageTemp.height / 6
+                background: Rectangle {
+                        color: "#F54B4B"
+                }
+            }
+            Label {
+                id: lblRGB
+                x: (imageTemp.width - lblRGB.width) * 0.5
+                y: neo1.height * 1.5
+                font.family: "Helvetica"
+                font.pointSize: 80
+                text: "RGB"
             }
 
-            Text {
-                id: textTempDownUnit
-                x: textTempDown.x + textTempDown.width
-                y: imageTemp.height * 0.55
-                text: qsTr(" °C")
-                font.pixelSize: imageTemp.height * 0.1
+            Label {
+                id: lblRGBDesc
+                x: (imageTemp.width - lblRGBDesc.width) * 0.5
+                y: lblRGB.height + (lblRGBDesc.height * 2)
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "Select color for neopixel light."
             }
+
+            Label {
+                id: lblRgbOff
+                x: imageTemp.width * 0.8
+                y: lblRGB.height + (lblRGBDesc.height * 2)
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "Off"
+            }
+
+            Label {
+                id: lblRgbOn
+                x: imageTemp.width * 0.8
+                y: neo1.height * 1.5
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "On"
+            }
+
             Image {
-                id: setgearTemp
-                x: imageTemp.width * 0.13
-                y: imageTemp.height * 0.1
-                width: imageTemp.height * 0.8
-                height: imageTemp.height * 0.8
-                source: "images/setgear.png"
-                fillMode: Image.PreserveAspectFit
+                id: wheelColor
+                x: lblRGB.x - wheelColor.width
+                y: lblRGB.y + neo1.height * 0.55
+                width: imageTemp.height * 0.25
+                height: imageTemp.height * 0.25
+                source: "images/wheel.png"
+            }
+
+            Slider {
+                id: sliderRgb
+                x: imageTemp.width * 0.875
+                y: neo1.height * 1.7
+                height: lblRGB.height
+                orientation: Qt.Vertical
+                from: 0
+                stepSize: 1
+                live: true
+                to: 255
+                snapMode: Slider.SnapAlways
             }
         }
 
@@ -138,117 +147,68 @@ Page {
             height: grid.height / 2
             anchors.right: parent.right
             anchors.top: parent.top
-            source: "images/humidity.jpg"
             anchors.rightMargin: 0
             anchors.topMargin: 0
-            sourceSize.height: grid.height * 0.5
-            sourceSize.width: grid.width * 0.5
-            fillMode: Image.Stretch
+            source: "images/IONbg.png"
 
-            Image {
-                id: imageHumidBar
-                x: imageHumid.width * 0.25
-                y: imageHumid.height * 0
-                width: imageHumid.width * 0.68
-                height: imageHumid.height * 1
-                source: "images/bluebar.png"
-                autoTransform: true
-                sourceSize.height: 184
-                sourceSize.width: 267
-                fillMode: Image.PreserveAspectFit
+            Label {
+                id: lblIonize
+                x: (imageHumid.width - lblIonize.width) * 0.5
+                y: neo1.height * 1.5
+                font.family: "Helvetica"
+                font.pointSize: 80
+                text: "ION"
+            }
+
+            Label {
+                id: lblIonizeDesc
+                x:  (imageHumid.width - lblIonizeDesc.width) * 0.5
+                y: lblRGB.height + (lblRGBDesc.height * 2)
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "Turn on/off ionize module."
+            }
+
+            Label {
+                id: lblIonizeOff
+                x: imageTemp.width * 0.8
+                y: lblRGB.height + (lblIonizeDesc.height * 2)
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "Off"
+            }
+
+            Label {
+                id: lblIonizeOn
+                x: imageTemp.width * 0.8
+                y: neo1.height * 1.5
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "On"
             }
 
             Image {
-                id: imageHumidCircle
-                x: imageHumid.width * 0.15
-                y: imageHumid.height * 0.15
-                width: imageHumid.height * 0.7
-                height: imageHumid.height * 0.7
-                source: "images/blue.png"
-                fillMode: Image.PreserveAspectFit
-
-                Image {
-                    id: imageHumidIcon
-                    x: imageHumidCircle.width * 0.5 - (imageHumid.height * 0.25) / 2
-                    y: imageHumidCircle.height * 0.5 - (imageHumid.height * 0.25) / 2
-                    width: imageHumid.height * 0.25
-                    height: imageHumid.height * 0.25
-                    source: "images/humid.png"
-                    fillMode: Image.PreserveAspectFit
-                }
-            }
-            Rectangle {
-                id: textHumidUp
-                x: imageHumid.width * 0.5
-                y: imageHumid.height * 0.3
-                width: 100
-                height: imageHumid.height * 0.15
-                color: textInputHumidUp.activeFocus ? "white" : "lightgray"
-
-                TextInput {
-                    id: textInputHumidUp
-                    focus: true
-                    anchors.fill: parent
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    font.pixelSize: imageHumid.height * 0.1
-                    horizontalAlignment: Text.AlignRight
-                    verticalAlignment: Text.AlignVCenter
-                    inputMask: "99"
-                }
-
+                id: ionic
+                x: lblIonize.x - ionic.width
+                y: lblRGB.y + neo1.height * 0.55
+                width: imageHumid.height * 0.25
+                height: imageHumid.height * 0.25
+                source: "images/ionic.png"
             }
 
-            Text {
-                id: textHumidUnitUp
-                x: textHumidUp.x + textHumidUp.width
-                y: imageHumid.height * 0.3
-                text: qsTr(" %RH")
-                font.pixelSize: imageHumid.height * 0.1
+            Slider {
+                id: sliderIonic
+                x: imageTemp.width * 0.875
+                y: neo1.height * 1.7
+                height: lblRGB.height
+                orientation: Qt.Vertical
+                from: 0
+                stepSize: 1
+                live: true
+                to: 1
+                snapMode: Slider.SnapAlways
             }
 
-            Rectangle {
-                id: textHumidDown
-                x: imageHumid.width * 0.5
-                y: imageHumid.height * 0.55
-                width: 100
-                height: imageHumid.height * 0.15
-                color: textInputHumidDown.activeFocus ? "white" : "lightgray"
-
-                TextInput {
-                    id: textInputHumidDown
-                    focus: true
-                    anchors.fill: parent
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    font.pixelSize: imageHumid.height * 0.1
-                    horizontalAlignment: Text.AlignRight
-                    verticalAlignment: Text.AlignVCenter
-                    inputMask: "99"
-                }
-
-            }
-
-            Text {
-                id: textHumidDownUnit
-                x: textHumidDown.x + textHumidDown.width
-                y: imageHumid.height * 0.55
-                text: qsTr(" %RH")
-                font.pixelSize: imageHumid.height * 0.1
-            }
-            Image {
-                id: setgearHumid
-                x: imageHumid.width * 0.13
-                y: imageHumid.height * 0.1
-                width: imageHumid.height * 0.8
-                height: imageHumid.height * 0.8
-                source: "images/setgear.png"
-                fillMode: Image.PreserveAspectFit
-            }
         }
 
         Image {
@@ -256,229 +216,140 @@ Page {
             width: grid.width / 2
             height: grid.height / 2
             x: 0
-            y: (inputPanel.active && (textInputCO2Down.activeFocus || textInputCO2Up.activeFocus)) ? 0 : grid.height / 2
-            source: "images/carbondioxide.png"
+            y: grid.height / 2
             anchors.bottomMargin: 0
             sourceSize.height: grid.height / 2
             sourceSize.width: grid.width / 2
             fillMode: Image.Stretch
+            source: "images/UVbg.png"
 
-            Image {
-                id: imageCO2Bar
-                x: imageCO2.width * 0.25
-                y: imageCO2.height * 0
-                width: imageCO2.width * 0.68
-                height: imageCO2.height * 1
-                source: "images/graybar.png"
-                fillMode: Image.PreserveAspectFit
+            Label {
+                id: lblUV
+                x: (imageCO2.width - lblUV.width) * 0.5
+                y: neo1.height * 1.5
+                font.family: "Helvetica"
+                font.pointSize: 80
+                text: "UV"
+            }
+
+            Label {
+                id: lblUVDesc
+                x: (imageCO2.width - lblUVDesc.width) * 0.5
+                y: lblUV.height + (lblRGBDesc.height * 2)
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "Turn on/off UV light."
+            }
+
+            Label {
+                id: lblUVOff
+                x: imageCO2.width * 0.8
+                y: lblUV.height + (lblUVDesc.height * 2)
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "Off"
+            }
+
+            Label {
+                id: lblUVOn
+                x: imageCO2.width * 0.8
+                y: neo1.height * 1.5
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "On"
             }
 
             Image {
-                id: imageCO2Circle
-                x: imageCO2.width * 0.15
-                y: imageCO2.height * 0.15
-                width: imageCO2.height * 0.7
-                height: imageCO2.height * 0.7
-                source: "images/gray.png"
-                fillMode: Image.PreserveAspectFit
-
-                Image {
-                    id: imageCO2Icon
-                    x: imageCO2Circle.width * 0.5 - (imageCO2.height * 0.25) / 2
-                    y: imageCO2Circle.height * 0.5 - (imageCO2.height * 0.25) / 2
-                    width: imageCO2.height * 0.25
-                    height: imageCO2.height * 0.25
-                    source: "images/co2.png"
-                    fillMode: Image.PreserveAspectFit
-                }
-            }
-            Rectangle {
-                id: textCO2Up
-                x: imageCO2.width * 0.5
-                y: imageCO2.height * 0.3
-                width: 100
-                height: imageCO2.height * 0.15
-                color: textInputCO2Up.activeFocus ? "white" : "lightgray"
-
-                TextInput {
-                    id: textInputCO2Up
-                    focus: true
-                    anchors.fill: parent
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    font.pixelSize: imageCO2.height * 0.1
-                    horizontalAlignment: Text.AlignRight
-                    verticalAlignment: Text.AlignVCenter
-                    inputMask: "9999"
-                }
-
+                id: uvlight
+                x: lblUV.x - uvlight.width
+                y: lblUV.y + neo1.height * 0.55
+                width: imageCO2.height * 0.25
+                height: imageCO2.height * 0.25
+                source: "images/uv.png"
             }
 
-            Text {
-                id: textCO2UnitUp
-                x: textCO2Up.x + textCO2Up.width
-                y: imageCO2.height * 0.3
-                text: qsTr(" PPM")
-                font.pixelSize: imageCO2.height * 0.1
-            }
-
-            Rectangle {
-                id: textCO2Down
-                x: imageCO2.width * 0.5
-                y: imageCO2.height * 0.55
-                width: 100
-                height: imageCO2.height * 0.15
-                color: textInputCO2Down.activeFocus ? "white" : "lightgray"
-
-                TextInput {
-                    id: textInputCO2Down
-                    focus: true
-                    anchors.fill: parent
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    font.pixelSize: imageCO2.height * 0.1
-                    horizontalAlignment: Text.AlignRight
-                    verticalAlignment: Text.AlignVCenter
-                    inputMask: "9999"
-                }
-
-            }
-
-            Text {
-                id: textCO2
-                x: textCO2Down.x + textCO2Down.width
-                y: imageO2.height * 0.55
-                text: qsTr(" PPM")
-                font.pixelSize: imageCO2.height * 0.1
-            }
-            Image {
-                id: setgearCO2
-                x: imageCO2.width * 0.13
-                y: imageCO2.height * 0.1
-                width: imageCO2.height * 0.8
-                height: imageCO2.height * 0.8
-                source: "images/setgear.png"
-                fillMode: Image.PreserveAspectFit
+            Slider {
+                id: sliderUV
+                x: imageCO2.width * 0.875
+                y: neo1.height * 1.7
+                height: lblRGB.height
+                orientation: Qt.Vertical
+                from: 0
+                stepSize: 1
+                live: true
+                to: 1
+                snapMode: Slider.SnapAlways
             }
         }
 
         Image {
             id: imageO2
             x: grid.width / 2
-            y: (inputPanel.active && (textInputO2Down.activeFocus || textInputO2Up.activeFocus)) ? 0 : grid.height / 2
+            y: grid.height / 2
             width: grid.width / 2
             height: grid.height / 2
-            source: "images/oxigen.jpg"
             sourceSize.height: 200
             sourceSize.width: 400
             layer.textureMirroring: ShaderEffectSource.NoMirroring
             fillMode: Image.Stretch
+            source: "images/FANbg.png"
 
-            Image {
-                id: imageO2Bar
-                x: imageO2.width * 0.25
-                y: imageO2.height * 0
-                width: imageO2.width * 0.68
-                height: imageO2.height * 1
-                source: "images/greenbar.png"
-                fillMode: Image.PreserveAspectFit
+            Label {
+                id: lblFan
+                x: (imageO2.width - lblFan.width) * 0.5
+                y: neo1.height * 1.5
+                font.family: "Helvetica"
+                font.pointSize: 80
+                text: "FAN"
+            }
+
+            Label {
+                id: lblFanDesc
+                x: (imageO2.width - lblFanDesc.width) * 0.5
+                y: lblFan.height + (lblRGBDesc.height * 2)
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "Turn on/off Fan."
+            }
+
+            Label {
+                id: lblFanOff
+                x: imageO2.width * 0.8
+                y: lblFan.height + (lblFanDesc.height * 2)
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "Off"
+            }
+
+            Label {
+                id: lblFanOn
+                x: imageO2.width * 0.8
+                y: neo1.height * 1.5
+                font.family: "Helvetica"
+                font.pointSize: 20
+                text: "On"
             }
 
             Image {
-                id: imageO2Circle
-                x: imageO2.width * 0.15
-                y: imageO2.height * 0.15
-                width: imageO2.height * 0.7
-                height: imageO2.height * 0.7
-                source: "images/green.png"
-                fillMode: Image.PreserveAspectFit
-                Image {
-                    id: imageO2Icon
-                    x: imageO2Circle.width * 0.5 - (imageO2.height * 0.25) / 2
-                    y: imageO2Circle.height * 0.5 - (imageO2.height * 0.25) / 2
-                    width: imageO2.height * 0.25
-                    height: imageO2.height * 0.25
-                    source: "images/o2.png"
-                    fillMode: Image.PreserveAspectFit
-                }
+                id: fan
+                x: lblFan.x - fan.width
+                y: lblUV.y + neo1.height * 0.55
+                width: imageO2.height * 0.25
+                height: imageO2.height * 0.25
+                source: "images/fan.png"
             }
 
-            Rectangle {
-                id: textO2Up
-                x: imageO2.width * 0.5
-                y: imageO2.height * 0.3
-                width: 100
-                height: imageO2.height * 0.15
-                color: textInputO2Up.activeFocus ? "white" : "lightgray"
-
-                TextInput {
-                    id: textInputO2Up
-                    focus: true
-                    anchors.fill: parent
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    font.pixelSize: imageCO2.height * 0.1
-                    horizontalAlignment: Text.AlignRight
-                    verticalAlignment: Text.AlignVCenter
-                    inputMask: "99"
-                }
-
-            }
-
-            Text {
-                id: textO2UnitUp
-                x: textO2Up.x + textO2Up.width
-                y: imageO2.height * 0.3
-                text: qsTr(" %")
-                font.pixelSize: imageO2.height * 0.1
-            }
-
-            Rectangle {
-                id: textO2Down
-                x: imageO2.width * 0.5
-                y: imageO2.height * 0.55
-                width: 100
-                height: imageO2.height * 0.15
-                color: textInputO2Down.activeFocus ? "white" : "lightgray"
-
-                TextInput {
-                    id: textInputO2Down
-                    focus: true
-                    anchors.fill: parent
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    font.pixelSize: imageO2.height * 0.1
-                    horizontalAlignment: Text.AlignRight
-                    verticalAlignment: Text.AlignVCenter
-                    inputMask: "99"
-                }
-
-            }
-
-            Text {
-                id: textHumid
-                x: textO2Down.x + textO2Down.width
-                y: imageO2.height * 0.55
-                text: qsTr(" %")
-                font.pixelSize: imageO2.height * 0.1
-            }
-
-            Image {
-                id: setgearO2
-                x: imageO2.width * 0.13
-                y: imageO2.height * 0.1
-                width: imageO2.height * 0.8
-                height: imageO2.height * 0.8
-                source: "images/setgear.png"
-                fillMode: Image.PreserveAspectFit
+            Slider {
+                id: sliderFan
+                x: imageO2.width * 0.875
+                y: neo1.height * 1.7
+                height: lblFan.height
+                orientation: Qt.Vertical
+                from: 0
+                stepSize: 1
+                live: true
+                to: 1
+                snapMode: Slider.SnapAlways
             }
         }
     }

@@ -88,10 +88,10 @@ ApplicationWindow {
                     icon.height: statusBar.height * 0.85
                     icon.source: "images/offgreenfan.png"
                     onPressed: {
-                        btnFan.icon.source = "file:///" + applicationDirPath + "/../images/greenfan.png"
+                        btnFan.icon.source = "file:///" + applicationDirPath + "/images/greenfan.png"
                     }
                     onReleased: {
-                        btnFan.icon.source = "file:///" + applicationDirPath + "/../images/offgreenfan.png"
+                        btnFan.icon.source = "file:///" + applicationDirPath + "/images/offgreenfan.png"
                     }
                 }
 
@@ -108,30 +108,10 @@ ApplicationWindow {
                     icon.height: statusBar.height * 0.85
                     icon.source: "images/offgreenice.png"
                     onPressed: {
-                        btnPeltier.icon.source = "file:///" + applicationDirPath + "/../images/greenice.png"
+                        btnPeltier.icon.source = "file:///" + applicationDirPath + "/images/greenice.png"
                     }
                     onReleased: {
-                        btnPeltier.icon.source = "file:///" + applicationDirPath + "/../images/offgreenice.png"
-                    }
-                }
-
-                RoundButton {
-                    id: btnNeoPixel
-                    width: statusBar.height * 0.85
-                    height: statusBar.height * 0.85
-                    padding: 0
-                    rightPadding: 0
-                    bottomPadding: 0
-                    topPadding: 0
-                    icon.color: "transparent"
-                    icon.width: statusBar.height * 0.85
-                    icon.height: statusBar.height * 0.85
-                    icon.source: "images/offneopixel.png"
-                    onPressed: {
-                        btnNeoPixel.icon.source = "file:///" + applicationDirPath + "/../images/neopixel.png"
-                    }
-                    onReleased: {
-                        btnNeoPixel.icon.source = "file:///" + applicationDirPath + "/../images/offneopixel.png"
+                        btnPeltier.icon.source = "file:///" + applicationDirPath + "/images/offgreenice.png"
                     }
                 }
 
@@ -148,10 +128,10 @@ ApplicationWindow {
                     icon.height: statusBar.height * 0.85
                     icon.source: "images/offlamp.png"
                     onPressed: {
-                        btnLamp.icon.source = "file:///" + applicationDirPath + "/../images/yellolamp.png"
+                        btnLamp.icon.source = "file:///" + applicationDirPath + "/images/yellolamp.png"
                     }
                     onReleased: {
-                        btnLamp.icon.source = "file:///" + applicationDirPath + "/../images/offlamp.png"
+                        btnLamp.icon.source = "file:///" + applicationDirPath + "/images/offlamp.png"
                     }
                 }
 
@@ -168,29 +148,16 @@ ApplicationWindow {
                     icon.height: statusBar.height * 0.85
                     icon.source: "images/offplug.png"
                     onPressed: {
-                        btnPlug.icon.source = "file:///" + applicationDirPath + "/../images/plug.png"
+                        btnPlug.icon.source = "file:///" + applicationDirPath + "/images/plug.png"
                     }
                     onReleased: {
-                        btnPlug.icon.source = "file:///" + applicationDirPath + "/../images/offplug.png"
+                        btnPlug.icon.source = "file:///" + applicationDirPath + "/images/offplug.png"
                     }
                     onClicked: {
-                        request('http://192.168.1.46:8080/command?data=UDYwIFIxIFQw', function (o) {
-
-                                                // log the json response
-                                                console.log(o.responseText);
-
-    //                                            // translate response into object
-    //                                            var d = eval('new Object(' + o.responseText + ')');
-
-    //                                            // access elements inside json object with dot notation
-    //                                            emailLabel.text = d.email
-    //                                            urlLabel.text = d.url
-    //                                            sinceLabel.text = d.since
-    //                                            bioLabel.text = d.bio
-
-                                            });
+                        request('http://192.168.1.46:8080/command?data=UDYwIFIxIFQw', function (o) {});
                     }
                 }
+
             }
 
             Text {

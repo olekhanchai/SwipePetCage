@@ -164,6 +164,7 @@ Page {
             axisX: DateTimeAxis {
                 format: "HH:mm:ss"
                 tickCount: 10
+                visible: false
             }
             axisY: ValueAxis {
                 min: 30
@@ -196,6 +197,7 @@ Page {
             axisX: DateTimeAxis {
                 tickCount: 10
                 format: "HH:mm:ss"
+                visible: false
             }
         }
     }
@@ -220,6 +222,7 @@ Page {
             axisX: DateTimeAxis {
                 tickCount: 10
                 format: "HH:mm:ss"
+                visible: false
             }
         }
     }
@@ -244,6 +247,7 @@ Page {
             axisX: DateTimeAxis {
                 tickCount: 10
                 format: "HH:mm:ss"
+                visible: false
             }
         }
     }
