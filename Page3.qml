@@ -4,8 +4,10 @@ import QtCharts 2.3
 
 Page {
     id: history
+    x: 0
+    y: 0
     width: screenWidth
-    height: screenHight * 0.85
+    height: screenHight * 0.75
 
     Image {
         id: imageO2
@@ -151,26 +153,24 @@ Page {
     ChartView {
         id: tempChart
         x: 0
-        y: rectangleTemp.y
-        z: 90
-
+        y: rectangleTemp.y - 30
+        z: -1
         width: rectangleTemp.width * 0.5
-        height: (parent.height - rectangleO2.y) * 0.5
+        height: parent.height * 0.5
 
         SplineSeries {
             id: splineTemp
             name: "Temp ( °C )"
             color: "#fa4040"
-            axisX: DateTimeAxis {
-                format: "HH:mm:ss"
-                tickCount: 10
-                visible: false
-            }
             axisY: ValueAxis {
                 min: 30
                 max: 31
                 tickCount: 5
                 labelFormat: "%.1f"
+            }
+            axisX: DateTimeAxis {
+                format: "HH:mm:ss"
+                tickCount: 5
             }
         }
     }
@@ -178,11 +178,11 @@ Page {
     ChartView {
         id: humidChart
         x: rectangleTemp.width * 0.5
-        y: rectangleTemp.y
-        z: 90
+        y: rectangleTemp.y - 30
+        z: -1
 
         width: rectangleTemp.width * 0.5
-        height: (parent.height - rectangleO2.y) * 0.5
+        height: parent.height * 0.5
 
         SplineSeries {
             id: splineHumid
@@ -195,9 +195,8 @@ Page {
                 labelFormat: "%d"
             }
             axisX: DateTimeAxis {
-                tickCount: 10
+                tickCount: 5
                 format: "HH:mm:ss"
-                visible: false
             }
         }
     }
@@ -205,10 +204,10 @@ Page {
     ChartView {
         id: co2Chart
         x: 0
-        y: tempChart.height + 80
-        z: 99
+        y: tempChart.y + tempChart.height - 45
+        z: -2
         width: rectangleTemp.width * 0.5
-        height: (parent.height - rectangleO2.y) * 0.5
+        height: parent.height * 0.5
         SplineSeries {
             id: splineCO2
             name: "CO2 ( ppm )"
@@ -220,9 +219,8 @@ Page {
                 labelFormat: "%d"
             }
             axisX: DateTimeAxis {
-                tickCount: 10
+                tickCount: 5
                 format: "HH:mm:ss"
-                visible: false
             }
         }
     }
@@ -230,10 +228,10 @@ Page {
     ChartView {
         id: o2Chart
         x: rectangleTemp.width * 0.5
-        y: humidChart.height + 80
-        z: 99
+        y: tempChart.y + tempChart.height - 45
+        z: -2
         width: rectangleTemp.width * 0.5
-        height: (parent.height - rectangleO2.y) * 0.5
+        height: parent.height * 0.5
         SplineSeries {
             id: splineO2
             name: "O2 ( \% )"
@@ -245,9 +243,8 @@ Page {
                 labelFormat: "%d"
             }
             axisX: DateTimeAxis {
-                tickCount: 10
+                tickCount: 5
                 format: "HH:mm:ss"
-                visible: false
             }
         }
     }

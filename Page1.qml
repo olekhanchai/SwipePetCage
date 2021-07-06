@@ -10,7 +10,7 @@ Page {
         x: 0
         y: 0
         width: screenWidth
-        height: screenHight * 0.85
+        height: screenHight * 0.75
 
         Image {
             id: imageTemp
@@ -21,64 +21,112 @@ Page {
             anchors.topMargin: 0
             source: "images/RGBbg.png"
             fillMode: Image.Stretch
-            Button {
+            Rectangle {
                 id: neo1
                 x: 0
                 y: 0
                 width: imageTemp.width / 3
                 height: imageTemp.height / 6
-                background: Rectangle {
-                        color: "#6068D5"
+                color: "#FF0000"
+                radius: 10
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        request('http://192.168.1.51:8080/command?data=UDYwIFIyNTUgRzAgQjAgVDY0', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    }
                 }
             }
-            Button {
+            Rectangle {
                 id: neo2
                 x: neo1.width
                 y: 0
                 width: imageTemp.width / 3
                 height: imageTemp.height / 6
-                background: Rectangle {
-                        color: "#D357DE"
+                color: "#00FF00"
+                radius: 10
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        request('http://192.168.1.51:8080/command?data=UDYwIFIwIEcyNTUgQjAgVDY0', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    }
                 }
             }
-            Button {
+            Rectangle {
                 id: neo3
                 x: neo2.width + neo2.x
                 y: 0
                 width: imageTemp.width / 3
                 height: imageTemp.height / 6
-                background: Rectangle {
-                        color: "#CDF73E"
+                color: "#0000FF"
+                radius: 10
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        request('http://192.168.1.51:8080/command?data=UDYwIFIwIEcwIEIyNTUgVDY0', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    }
                 }
             }
-            Button {
+            Rectangle {
                 id: neo7
                 x: 0
                 y: imageTemp.height - neo1.height
                 width: imageTemp.width / 3
                 height: imageTemp.height / 6
-                background: Rectangle {
-                        color: "#0DFFFF"
+                color: "#C800C8"
+                radius: 10
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        request('http://192.168.1.51:8080/command?data=UDYwIFIyMDAgRzAgQjIwMCBUNjQ=', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    }
                 }
             }
-            Button {
+            Rectangle {
                 id: neo8
                 x: neo7.width
                 y: imageTemp.height - neo1.height
                 width: imageTemp.width / 3
                 height: imageTemp.height / 6
-                background: Rectangle {
-                        color: "#FDFDFD"
+                color: "#32E6FF"
+                radius: 10
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        request('http://192.168.1.51:8080/command?data=UDYwIFI1MCBHMjMwIEIyNTUgVDY0=', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    }
                 }
             }
-            Button {
+            Rectangle {
                 id: neo9
                 x: neo8.width + neo8.x
                 y: imageTemp.height - neo1.height
                 width: imageTemp.width / 3
                 height: imageTemp.height / 6
-                background: Rectangle {
-                        color: "#F54B4B"
+                color: "#FF6400"
+                radius: 10
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        request('http://192.168.1.51:8080/command?data=UDYwIFIyNTUgRzEwMCBCMCBUNjQ=', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    }
                 }
             }
             Label {
@@ -101,20 +149,29 @@ Page {
 
             Label {
                 id: lblRgbOff
-                x: imageTemp.width * 0.8
-                y: lblRGB.height + (lblRGBDesc.height * 2)
+                x: imageTemp.width * 0.8 + 20
+                y: lblRGB.height + (lblRGBDesc.height * 2) - 20
                 font.family: "Helvetica"
                 font.pointSize: 20
-                text: "Off"
+                text: "-"
             }
 
             Label {
                 id: lblRgbOn
-                x: imageTemp.width * 0.8
+                x: imageTemp.width * 0.8 + 20
                 y: neo1.height * 1.5
                 font.family: "Helvetica"
                 font.pointSize: 20
-                text: "On"
+                text: "+"
+            }
+
+            Label {
+                id: lblRgbText
+                x: imageTemp.width * 0.8 + 40
+                y: recRgb.y + recRgb.height + 5
+                font.family: "Helvetica"
+                font.pointSize: 8
+                text: "Brightness"
             }
 
             Image {
@@ -125,19 +182,50 @@ Page {
                 height: imageTemp.height * 0.25
                 source: "images/wheel.png"
             }
-
+            Rectangle {
+                id: recRgb
+                x: imageTemp.width * 0.875 - 2
+                y: neo1.height * 1.7 - 10
+                width: 40
+                height: lblRGB.height + 10
+                color: "#ffffff"
+                radius: 15
+            }
             Slider {
                 id: sliderRgb
                 x: imageTemp.width * 0.875
                 y: neo1.height * 1.7
+                z: 99
                 height: lblRGB.height
                 orientation: Qt.Vertical
                 from: 0
-                stepSize: 1
+                stepSize: 5
                 live: true
-                to: 255
+                to: 50
                 snapMode: Slider.SnapAlways
+                onMoved: {
+                    // Create Base64 Object
+                    var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
+                    var strEncode = 'P60 R'+sliderRgb.value+' G'+sliderRgb.value+' B'+sliderRgb.value+' T64';
+                    request('http://192.168.1.51:8080/command?data='+Base64.encode(strEncode), function (o) {
+                        console.log(o.responseText);
+                        var errorText = '';
+                    });
+
+//                    if(sliderRgb.value) {
+//                        request('http://192.168.1.51:8080/command?data=UDYwIFIwIFIwIEIwIFQ2NA==', function (o) {
+//                            console.log(o.responseText);
+//                            var errorText = '';
+//                        });
+//                    } else {
+//                        request('http://192.168.1.51:8080/command?data=UDYwIFIyNTUgUjI1NSBCMjU1IFQ2NA==', function (o) {
+//                            console.log(o.responseText);
+//                            var errorText = '';
+//                        });
+//                    }
+                }
             }
+
         }
 
         Image {
@@ -172,7 +260,7 @@ Page {
             Label {
                 id: lblIonizeOff
                 x: imageTemp.width * 0.8
-                y: lblRGB.height + (lblIonizeDesc.height * 2)
+                y: lblRGB.height + (lblIonizeDesc.height * 2) - 20
                 font.family: "Helvetica"
                 font.pointSize: 20
                 text: "Off"
@@ -195,7 +283,15 @@ Page {
                 height: imageHumid.height * 0.25
                 source: "images/ionic.png"
             }
-
+            Rectangle {
+                id: recIonic
+                x: imageHumid.width * 0.875 - 2
+                y: neo1.height * 1.7 - 10
+                width: 40
+                height: lblRGB.height + 10
+                color: "#ffffff"
+                radius: 15
+            }
             Slider {
                 id: sliderIonic
                 x: imageTemp.width * 0.875
@@ -207,6 +303,19 @@ Page {
                 live: true
                 to: 1
                 snapMode: Slider.SnapAlways
+                onMoved: {
+                    if (sliderIonic.value) {
+                        request('http://192.168.1.51:8080/command?data=UDEwIFIxIFMx', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    } else {
+                        request('http://192.168.1.51:8080/command?data=UDEwIFIxIFMw', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    }
+                }
             }
 
         }
@@ -244,7 +353,7 @@ Page {
             Label {
                 id: lblUVOff
                 x: imageCO2.width * 0.8
-                y: lblUV.height + (lblUVDesc.height * 2)
+                y: lblUV.height + (lblUVDesc.height * 2) - 20
                 font.family: "Helvetica"
                 font.pointSize: 20
                 text: "Off"
@@ -267,7 +376,15 @@ Page {
                 height: imageCO2.height * 0.25
                 source: "images/uv.png"
             }
-
+            Rectangle {
+                id: recUV
+                x: imageCO2.width * 0.875 - 2
+                y: neo1.height * 1.7 - 10
+                width: 40
+                height: lblRGB.height + 10
+                color: "#ffffff"
+                radius: 15
+            }
             Slider {
                 id: sliderUV
                 x: imageCO2.width * 0.875
@@ -279,6 +396,19 @@ Page {
                 live: true
                 to: 1
                 snapMode: Slider.SnapAlways
+                onMoved: {
+                    if (sliderUV.value) {
+                        request('http://192.168.1.51:8080/command?data=UDEwIFIyIFMx', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    } else {
+                        request('http://192.168.1.51:8080/command?data=UDEwIFIyIFMw', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    }
+                }
             }
         }
 
@@ -315,7 +445,7 @@ Page {
             Label {
                 id: lblFanOff
                 x: imageO2.width * 0.8
-                y: lblFan.height + (lblFanDesc.height * 2)
+                y: lblFan.height + (lblFanDesc.height * 2) - 20
                 font.family: "Helvetica"
                 font.pointSize: 20
                 text: "Off"
@@ -338,7 +468,15 @@ Page {
                 height: imageO2.height * 0.25
                 source: "images/fan.png"
             }
-
+            Rectangle {
+                id: recFan
+                x: imageCO2.width * 0.875 - 2
+                y: neo1.height * 1.7 - 10
+                width: 40
+                height: lblRGB.height + 10
+                color: "#ffffff"
+                radius: 15
+            }
             Slider {
                 id: sliderFan
                 x: imageO2.width * 0.875
@@ -350,7 +488,34 @@ Page {
                 live: true
                 to: 1
                 snapMode: Slider.SnapAlways
+                onMoved: {
+                    if (sliderFan.value) {
+                        request('http://192.168.1.51:8080/command?data=UDEwIFIzIFMx', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    } else {
+                        request('http://192.168.1.51:8080/command?data=UDEwIFIzIFMw', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                    }
+                }
             }
         }
+
     }
+
+    // this function is included locally, but you can also include separately via a header definition
+    function request(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = (function(myxhr) {
+            return function() {
+                callback(myxhr);
+            }
+        })(xhr);
+        xhr.open('GET', url, true);
+        xhr.send('');
+    }
+
 }

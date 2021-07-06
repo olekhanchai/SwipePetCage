@@ -41,134 +41,20 @@ ApplicationWindow {
     ColumnLayout {
         x: 0
         y: 0
-
-        SwipeView {
-            id: swipeView
-            Layout.preferredHeight: screenHight * 0.85
-            Layout.preferredWidth: screenWidth
-            currentIndex: 1
-
-            Page1{}
-            Page2{}
-            Page3{}
-            Page4{}
-
-        }
         Row {
-            id: statusBar
-            Layout.preferredHeight: screenHight * 0.15
+            width: parent.width
+            height: statusBar.height
+            id: titleBar
+            Layout.preferredHeight: screenHight * 0.1
             Layout.preferredWidth: screenWidth
-            spacing: 10
-            Text {
-                id: lblStatus
-                height: statusBar.height  - (statusBar.height * 0.25) / 2
-                text: qsTr("Normal Running State")
-                font.pixelSize: statusBar.height * 0.25
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                anchors.left: parent.left
-                rightPadding: 10
-                leftPadding: 10
-                textFormat: Text.PlainText
-            }
-            Row {
-                id: iconBar
-                x: (screenWidth - iconBar.width) * 0.5
-                spacing: 10
-                RoundButton {
-                    id: btnFan
-                    width: statusBar.height * 0.85
-                    height: statusBar.height * 0.85
-                    padding: 0
-                    rightPadding: 0
-                    bottomPadding: 0
-                    topPadding: 0
-                    icon.color: "transparent"
-                    icon.width: statusBar.height * 0.85
-                    icon.height: statusBar.height * 0.85
-                    icon.source: "images/offgreenfan.png"
-                    onPressed: {
-                        btnFan.icon.source = "file:///" + applicationDirPath + "/images/greenfan.png"
-                    }
-                    onReleased: {
-                        btnFan.icon.source = "file:///" + applicationDirPath + "/images/offgreenfan.png"
-                    }
-                }
-
-                RoundButton {
-                    id: btnPeltier
-                    width: statusBar.height * 0.85
-                    height: statusBar.height * 0.85
-                    padding: 0
-                    rightPadding: 0
-                    bottomPadding: 0
-                    topPadding: 0
-                    icon.color: "transparent"
-                    icon.width: statusBar.height * 0.85
-                    icon.height: statusBar.height * 0.85
-                    icon.source: "images/offgreenice.png"
-                    onPressed: {
-                        btnPeltier.icon.source = "file:///" + applicationDirPath + "/images/greenice.png"
-                    }
-                    onReleased: {
-                        btnPeltier.icon.source = "file:///" + applicationDirPath + "/images/offgreenice.png"
-                    }
-                }
-
-                RoundButton {
-                    id: btnLamp
-                    width: statusBar.height * 0.85
-                    height: statusBar.height * 0.85
-                    padding: 0
-                    rightPadding: 0
-                    bottomPadding: 0
-                    topPadding: 0
-                    icon.color: "transparent"
-                    icon.width: statusBar.height * 0.85
-                    icon.height: statusBar.height * 0.85
-                    icon.source: "images/offlamp.png"
-                    onPressed: {
-                        btnLamp.icon.source = "file:///" + applicationDirPath + "/images/yellolamp.png"
-                    }
-                    onReleased: {
-                        btnLamp.icon.source = "file:///" + applicationDirPath + "/images/offlamp.png"
-                    }
-                }
-
-                RoundButton {
-                    id: btnPlug
-                    width: statusBar.height * 0.85
-                    height: statusBar.height * 0.85
-                    padding: 0
-                    rightPadding: 0
-                    bottomPadding: 0
-                    topPadding: 0
-                    icon.color: "transparent"
-                    icon.width: statusBar.height * 0.85
-                    icon.height: statusBar.height * 0.85
-                    icon.source: "images/offplug.png"
-                    onPressed: {
-                        btnPlug.icon.source = "file:///" + applicationDirPath + "/images/plug.png"
-                    }
-                    onReleased: {
-                        btnPlug.icon.source = "file:///" + applicationDirPath + "/images/offplug.png"
-                    }
-                    onClicked: {
-                        request('http://192.168.1.46:8080/command?data=UDYwIFIxIFQw', function (o) {});
-                    }
-                }
-
-            }
 
             Text {
                 id: lblDateTime
-                height: statusBar.height  - (statusBar.height * 0.25) / 2
-                font.pixelSize: statusBar.height * 0.25
-                anchors.right: parent.right
+                height: screenHight * 0.1
+                font.pixelSize: statusBar.height * 0.4
+                anchors.left: parent.left
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                rightPadding: 10
-                leftPadding: 10
                 textFormat: Text.PlainText
                 Timer {
                    interval: 1000
@@ -185,6 +71,73 @@ ApplicationWindow {
                        lblDateTime.text = datetime;
                    }
                 }
+            }
+
+            Image {
+                height: 70
+                width: 400
+                source: 'images/hospitallogo.png'
+                anchors.right: parent.right
+            }
+
+        }
+        SwipeView {
+            id: swipeView
+            width: screenWidth
+            height: screenHeight * 0.75
+            Layout.preferredHeight: screenHight * 0.75
+            Layout.preferredWidth: screenWidth
+            currentIndex: 1
+            Page1{}
+            Page2{}
+            Page3{}
+            Page4{}
+        }
+        Row {
+            id: statusBar
+            Layout.preferredHeight: screenHight * 0.15
+            Layout.preferredWidth: screenWidth
+            spacing: 10
+
+            Image {
+                id: claw
+                anchors.left: parent.left
+                source: 'images/claw.png'
+                x: 20
+                y: (parent.height - claw.height) * 0.5 - 10
+                width: 150
+                height: 50
+                Label {
+                    id: lblName
+                    height: screenHight * 0.1
+                    text: qsTr("Name")
+                    font.pixelSize: statusBar.height * 0.2
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    anchors.left: parent.left
+                    leftPadding: 50
+                }
+            }
+
+            Rectangle {
+                x: claw.x + claw.width
+                id: recName
+                y: (parent.height - claw.height) * 0.5 - 20
+                width: screenWidth / 3
+                height: screenHight * 0.1
+                color: "#64F03C"
+                radius: 15
+            }
+
+            Text {
+                id: lblCounter
+                height: screenHight * 0.1
+                font.pixelSize: statusBar.height * 0.4
+                anchors.right: parent.right
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                textFormat: Text.PlainText
+                text: "Usaged : 00.00 hrs "
             }
 
         }

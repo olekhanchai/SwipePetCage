@@ -11,7 +11,7 @@ Page {
         x: 0
         y: 0
         width: screenWidth
-        height: screenHight * 0.85
+        height: screenHight * 0.75
 
         Image {
             id: imageTemp
@@ -29,9 +29,9 @@ Page {
 
             Image {
                 id: imageTempBar
-                x: imageTemp.width * 0.25
+                x: imageTemp.width * 0.25 + 20
                 y: imageTemp.height * 0
-                width: imageTemp.width * 0.68
+                width: imageTemp.width * 0.58
                 height: imageTemp.height * 1
                 source: "images/orangebar.png"
                 sourceSize.height: imageTemp.height * 1
@@ -87,6 +87,7 @@ Page {
                 width: imageTemp.height * 0.7
                 height: imageTemp.height * 0.7
                 source: "images/setgear.png"
+                visible: false
             }
 
             Image {
@@ -98,6 +99,7 @@ Page {
                 source: "images/redup.png"
                 sourceSize.height: imageTemp.height * 0.25
                 sourceSize.width: imageTemp.height * 0.25
+                visible: false
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
@@ -130,6 +132,7 @@ Page {
                 source: "images/reddown.png"
                 sourceSize.height: imageTemp.height * 0.25
                 sourceSize.width: imageTemp.height * 0.25
+                visible: false
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
@@ -171,9 +174,9 @@ Page {
 
             Image {
                 id: imageHumidBar
-                x: imageHumid.width * 0.25
+                x: imageHumid.width * 0.25 + 20
                 y: imageHumid.height * 0
-                width: imageHumid.width * 0.68
+                width: imageHumid.width * 0.58
                 height: imageHumid.height * 1
                 source: "images/bluebar.png"
                 autoTransform: true
@@ -230,6 +233,7 @@ Page {
                 width: imageHumid.height * 0.7
                 height: imageHumid.height * 0.7
                 source: "images/setgear.png"
+                visible: false
             }
 
             Image {
@@ -241,6 +245,7 @@ Page {
                 source: "images/blueup.png"
                 sourceSize.height: imageHumid.height * 0.25
                 sourceSize.width: imageHumid.height * 0.25
+                visible: false
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
@@ -273,6 +278,7 @@ Page {
                 source: "images/bluedown.png"
                 sourceSize.height:imageHumid.height * 0.25
                 sourceSize.width: imageHumid.height * 0.25
+                visible: false
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
@@ -314,9 +320,9 @@ Page {
 
             Image {
                 id: imageCO2Bar
-                x: imageCO2.width * 0.25
+                x: imageCO2.width * 0.25 + 20
                 y: imageCO2.height * 0
-                width: imageCO2.width * 0.68
+                width: imageCO2.width * 0.58
                 height: imageCO2.height * 1
                 source: "images/graybar.png"
                 fillMode: Image.PreserveAspectFit
@@ -370,6 +376,7 @@ Page {
                 width: imageCO2.height * 0.7
                 height: imageCO2.height * 0.7
                 source: "images/setgear.png"
+                visible: false
             }
 
             Image {
@@ -381,6 +388,7 @@ Page {
                 source: "images/greyup.png"
                 sourceSize.height: imageCO2.height * 0.25
                 sourceSize.width: imageCO2.height * 0.25
+                visible: false
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
@@ -413,6 +421,7 @@ Page {
                 source: "images/greydown.png"
                 sourceSize.height: imageCO2.height * 0.25
                 sourceSize.width: imageCO2.height * 0.25
+                visible: false
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
@@ -456,9 +465,9 @@ Page {
 
             Image {
                 id: imageO2Bar
-                x: imageO2.width * 0.25
+                x: imageO2.width * 0.25 + 20
                 y: imageO2.height * 0
-                width: imageO2.width * 0.68
+                width: imageO2.width * 0.58
                 height: imageO2.height * 1
                 source: "images/greenbar.png"
                 fillMode: Image.PreserveAspectFit
@@ -510,6 +519,7 @@ Page {
                 width: imageO2.height * 0.7
                 height: imageO2.height * 0.7
                 source: "images/setgear.png"
+                visible: false
             }
 
             Image {
@@ -521,6 +531,7 @@ Page {
                 source: "images/greenup.png"
                 sourceSize.height: imageO2.height
                 sourceSize.width: imageO2.height
+                visible: false
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
@@ -553,6 +564,7 @@ Page {
                 source: "images/greendown.png"
                 sourceSize.height: imageO2.height
                 sourceSize.width: imageO2.height
+                visible: false
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
@@ -584,7 +596,7 @@ Page {
        running: true
        repeat: true
        onTriggered: {
-            request('http://192.168.1.46:8080/command?data=UDQw', function (o) {
+            request('http://raspberrypi.local:8080/command?data=UDQw', function (o) {
             console.log(o.responseText);
             var errorText = '';
 
