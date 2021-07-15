@@ -70,5 +70,8 @@
         <file>images/UVbg.png</file>
         <file>images/claw.png</file>
         <file>images/hospitallogo.png</file>
+        <file>Page5.qml</file>
+        <file>images/humidIcon.png</file>
+        <file>ContactModel.qml</file>
     </qresource>
 </RCC>

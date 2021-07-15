@@ -634,6 +634,15 @@ Page {
                 imageHumidCircle.source = "images/blue.png"
                 textHumid.text = humid[1] + " %RH";
                 lblStatus.text = "Normal State Running";
+
+                //Check for Alarm
+                if (parseInt(textTemp.text) < rangeSliderTemp.first.value) {
+                    console.log("this is upper alarm");
+
+                }
+                if (parseInt(textTemp.text) > rangeSliderTemp.second.value) {
+                    console.log("this is upper alarm");
+                }
             }
 
            });

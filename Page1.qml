@@ -11,7 +11,6 @@ Page {
         y: 0
         width: screenWidth
         height: screenHight * 0.75
-
         Image {
             id: imageTemp
             width: grid.width * 0.5

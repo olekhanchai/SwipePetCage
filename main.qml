@@ -24,6 +24,7 @@ ApplicationWindow {
                 y: window.height - inputPanel.height
             }
         }
+
         transitions: Transition {
             from: ""
             to: "visible"
@@ -74,37 +75,10 @@ ApplicationWindow {
             }
 
             Image {
-                height: 70
-                width: 400
-                source: 'images/hospitallogo.png'
-                anchors.right: parent.right
-            }
-
-        }
-        SwipeView {
-            id: swipeView
-            width: screenWidth
-            height: screenHeight * 0.75
-            Layout.preferredHeight: screenHight * 0.75
-            Layout.preferredWidth: screenWidth
-            currentIndex: 1
-            Page1{}
-            Page2{}
-            Page3{}
-            Page4{}
-        }
-        Row {
-            id: statusBar
-            Layout.preferredHeight: screenHight * 0.15
-            Layout.preferredWidth: screenWidth
-            spacing: 10
-
-            Image {
                 id: claw
-                anchors.left: parent.left
                 source: 'images/claw.png'
-                x: 20
-                y: (parent.height - claw.height) * 0.5 - 10
+                x: parent.width * 0.5 + 20
+                y: (parent.height - claw.height) * 0.5
                 width: 150
                 height: 50
                 Label {
@@ -117,16 +91,61 @@ ApplicationWindow {
                     anchors.left: parent.left
                     leftPadding: 50
                 }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        inputPanel.active = !inputPanel.active;
+                    }
+                }
             }
 
             Rectangle {
-                x: claw.x + claw.width
+                x: claw.x + claw.width + 20
                 id: recName
-                y: (parent.height - claw.height) * 0.5 - 20
+                y: (parent.height - claw.height) * 0.5 - 10
                 width: screenWidth / 3
                 height: screenHight * 0.1
                 color: "#64F03C"
                 radius: 15
+                TextInput {
+                    id: statusTextName
+                    anchors.fill: parent
+                    font.pixelSize: statusBar.height * 0.5
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    Keys.onReleased: {
+                        if (event.key === Qt.Key_Return) {
+                            inputPanel.active = false;
+                            claw.forceActiveFocus();
+                        }
+                    }
+                }
+            }
+        }
+        SwipeView {
+            id: swipeView
+            width: screenWidth
+            height: screenHeight * 0.75
+            Layout.preferredHeight: screenHight * 0.75
+            Layout.preferredWidth: screenWidth
+            currentIndex: 1
+            Page1{}
+            Page2{}
+            Page3{}
+            Page4{}
+            Page5{}
+        }
+        Row {
+            id: statusBar
+            Layout.preferredHeight: screenHight * 0.15
+            Layout.preferredWidth: screenWidth
+            spacing: 10
+
+            Image {
+                height: 70
+                width: 400
+                source: 'images/hospitallogo.png'
+                anchors.left: parent.left
             }
 
             Text {
