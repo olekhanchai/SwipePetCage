@@ -1,7 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.2
 import QtCharts 2.3
-import QtWebView 1.1
 
 Page {
     id: settings
@@ -46,7 +45,7 @@ Page {
         y: imageGear.y + imageGear.height + 20
         width: parent.width * 0.25 - 20
         height: parent.height * 0.8
-        color: "#FF6400"
+        color: "#CF6BBE"
 
         Image {
             id: imgTemp
@@ -109,7 +108,7 @@ Page {
         y: imageGear.y + imageGear.height + 20
         width: parent.width * 0.25 - 20
         height: parent.height * 0.8
-        color: "#0064FF"
+        color: "#99D9AA"
 
         Image {
             id: imgHumid
@@ -173,7 +172,7 @@ Page {
         y: imageGear.y + imageGear.height + 20
         width: parent.width * 0.25 - 20
         height: parent.height * 0.8
-        color: "#646464"
+        color: "#C8C8C8"
 
         Image {
             id: imgCo2

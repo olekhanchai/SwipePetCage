@@ -1,7 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.2
 import QtCharts 2.3
-import QtWebView 1.1
 import Qt.labs.folderlistmodel 2.2
 
 Page {
@@ -45,14 +44,14 @@ Page {
         font.pixelSize: history.height * 0.075
     }
 
-    WebView {
-        id: webView
-        x: 20
-        y: rectangleTemp.height + rectangleTemp.y + 20
-        width: history.width * 0.5 - 20
-        height: history.height - statusBar.height - 20
-        url: "http://192.168.1.47/html";
-    }
+//    WebView {
+//        id: webView
+//        x: 20
+//        y: rectangleTemp.height + rectangleTemp.y + 20
+//        width: history.width * 0.5 - 20
+//        height: history.height - statusBar.height - 20
+//        url: "http://192.168.1.47/html";
+//    }
 
     ListView {
         id: listFileItems
@@ -138,7 +137,7 @@ Page {
         visible: history.settingVis
     }
 
-    RoundButton {
+    Button {
         id: btnStreaming
         width:100
         height:100
@@ -175,7 +174,7 @@ Page {
         visible: history.settingVis
     }
 
-    RoundButton {
+    Button {
         id: btnSnapShot
         width:100
         height:100
@@ -211,7 +210,7 @@ Page {
         visible: history.settingVis
     }
 
-    RoundButton {
+    Button {
         id: btnRecVdo
         width:100
         height:100
