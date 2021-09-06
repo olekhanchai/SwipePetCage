@@ -7,9 +7,9 @@
 #include <QSize>
 #include <QScreen>
 #include <QDebug>
+#include <QNetworkInterface>
 #include "qsplineseries.h"
 #include "qchartview.h"
-#include <QtWebView>
 
 int main(int argc, char *argv[])
 {
@@ -18,16 +18,23 @@ int main(int argc, char *argv[])
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-    QtWebView::initialize();
     QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+    QString ipAddress;
+
+    const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
+    for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
+        if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost)
+             ipAddress = address.toString();
+    }
 
     QSize screenSize = QApplication::primaryScreen()->size();
 
     engine.rootContext()->setContextProperty("applicationDirPath", QApplication::applicationDirPath());
     engine.rootContext()->setContextProperty("screenWidth", screenSize.width() > screenSize.height() ? screenSize.width() : screenSize.height());
     engine.rootContext()->setContextProperty("screenHight", (screenSize.width() > screenSize.height() ? screenSize.height() : screenSize.width())*0.92);
+    engine.rootContext()->setContextProperty("ipAddress", ipAddress.isEmpty()?"127.0.0.1":ipAddress);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

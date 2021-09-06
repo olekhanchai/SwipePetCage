@@ -596,7 +596,7 @@ Page {
        running: true
        repeat: true
        onTriggered: {
-            request('http://raspberrypi.local:8080/command?data=UDQw', function (o) {
+            request('http://' + ipAddress + ':8080/command?data=UDQw', function (o) {
             console.log(o.responseText);
             var errorText = '';
 

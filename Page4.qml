@@ -1,8 +1,8 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.2
 import QtCharts 2.3
-import QtWebView 1.1
 import Qt.labs.folderlistmodel 2.2
+import Qt.labs.settings 1.1
 
 Page {
     id: history
@@ -43,15 +43,6 @@ Page {
         height: history.height * 0.1
         text: qsTr("Realtime Camera")
         font.pixelSize: history.height * 0.075
-    }
-
-    WebView {
-        id: webView
-        x: 20
-        y: rectangleTemp.height + rectangleTemp.y + 20
-        width: history.width * 0.5 - 20
-        height: history.height - statusBar.height - 20
-        url: "http://192.168.1.47/html";
     }
 
     ListView {
@@ -106,6 +97,17 @@ Page {
         to: 100
         snapMode: Slider.SnapAlways
         visible: history.settingVis
+
+        Settings {
+            id: settingFan
+            fileName: "Settings.dat"
+            category: "Controls"
+            property alias infaredVal: sliderInfaRed.value
+        }
+
+        onMoved: {
+            settingFan.sync();
+        }
     }
 
     Label {
@@ -128,6 +130,18 @@ Page {
         to: 100
         snapMode: Slider.SnapAlways
         visible: history.settingVis
+
+        Settings {
+            id: settingBrightness
+            fileName: "Settings.dat"
+            category: "Controls"
+            property alias brightnessVal: sliderBrightness.value
+        }
+
+        onMoved: {
+            settingBrightness.sync();
+        }
+
     }
 
     Label {
@@ -165,6 +179,18 @@ Page {
         to: 100
         snapMode: Slider.SnapAlways
         visible: history.settingVis
+
+        Settings {
+            id: settingContrast
+            fileName: "Settings.dat"
+            category: "Controls"
+            property alias contrastVal: sliderContrast.value
+        }
+
+        onMoved: {
+            settingContrast.sync();
+        }
+
     }
 
     Label {
@@ -201,6 +227,18 @@ Page {
         to: 100
         snapMode: Slider.SnapAlways
         visible: history.settingVis
+
+        Settings {
+            id: settingSaturation
+            fileName: "Settings.dat"
+            category: "Controls"
+            property alias saturationVal: sliderSaturation.value
+        }
+
+        onMoved: {
+            settingSaturation.sync();
+        }
+
     }
 
     Label {

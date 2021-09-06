@@ -2,6 +2,7 @@ import QtQuick 2.11
 import QtQuick.Controls 2.2
 import QtQuick.VirtualKeyboard 2.2
 import QtQuick.Layouts 1.0
+import Qt.labs.settings 1.1
 
 ApplicationWindow {
     id: window
@@ -117,7 +118,14 @@ ApplicationWindow {
                         if (event.key === Qt.Key_Return) {
                             inputPanel.active = false;
                             claw.forceActiveFocus();
+                            setting.sync();
                         }
+                    }
+                    Settings {
+                        id: settingName
+                        fileName: "Settings.dat"
+                        category: "Commons"
+                        property alias petName: statusTextName.text
                     }
                 }
             }
@@ -156,30 +164,48 @@ ApplicationWindow {
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 textFormat: Text.PlainText
-                text: "Usaged : 00.00 hrs "
+                property double cntUsage: 0
+                text: "Usaged : " + (cntUsage/60).toFixed(2) + " hrs "
+
+                Settings {
+                    id: settingCounter
+                    fileName: "Settings.dat"
+                    category: "Commons"
+                    property alias timeUsaged: lblCounter.cntUsage
+                }
+
+                Timer {
+                   interval: 60000
+                   running: true
+                   repeat: true
+                   onTriggered: {
+                       lblCounter.cntUsage++;
+                       settingCounter.sync();
+                   }
+                }
             }
 
         }
     }
     // this function is included locally, but you can also include separately via a header definition
-    function request(url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = (function(myxhr) {
-            return function() {
-                callback(myxhr);
-            }
-        })(xhr);
-        xhr.open('GET', url, true);
-        xhr.send('');
-    }
-    Timer {
-       interval: 60000
-       running: true
-       repeat: true
-       onTriggered: {
-            console.log("save data to database server")
-       }
-    }
+//    function request(url, callback) {
+//        var xhr = new XMLHttpRequest();
+//        xhr.onreadystatechange = (function(myxhr) {
+//            return function() {
+//                callback(myxhr);
+//            }
+//        })(xhr);
+//        xhr.open('GET', url, true);
+//        xhr.send('');
+//    }
+//    Timer {
+//       interval: 60000
+//       running: true
+//       repeat: true
+//       onTriggered: {
+//            console.log("save data to database server")
+//       }
+//    }
 }
 
 

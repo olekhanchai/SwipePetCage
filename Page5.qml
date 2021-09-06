@@ -1,7 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.2
-import QtCharts 2.3
-import QtWebView 1.1
+import Qt.labs.settings 1.1
 
 Page {
     id: settings
@@ -60,7 +59,7 @@ Page {
 
         Text {
             id: lblUpperTemp
-            x: recTemp.width * 0.5 - 20
+            x: recTemp.x + 10
             y: 20
             width: 69
             height: 30
@@ -70,7 +69,7 @@ Page {
 
         Text {
             id: txtUpperTemp
-            x: imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
+            x:  recTemp.x + 60
             y: 60
             text: Math.round(rangeSliderTemp.second.value * 100)>=10?Math.round(rangeSliderTemp.second.value * 100):"0"+Math.round(rangeSliderTemp.second.value * 100)
             font.pixelSize: 40
@@ -83,11 +82,29 @@ Page {
             second.value: 0.75
             first.value: 0.25
             orientation: Qt.Vertical
+
+            Settings {
+                id: settingRangeTemp
+                fileName: "Settings.dat"
+                category: "Controls"
+                property alias rangeTempUpperVal: rangeSliderTemp.second.value
+                property alias rangeTempLowerVal: rangeSliderTemp.first.value
+            }
+
+            Connections {
+                target: first
+                onValueChanged: settingRangeTemp.sync()
+            }
+
+            Connections {
+                target: second
+                onValueChanged: settingRangeTemp.sync()
+            }
         }
 
         Text {
             id: lblLowerTemp
-            x: recTemp.width * 0.5 - 20
+            x: recTemp.x + 10
             y: recTemp.height - lblLowerTemp.height - 20
             width: 69
             height: 30
@@ -97,7 +114,7 @@ Page {
 
         Text {
             id: txtLowerTemp
-            x: imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
+            x: recTemp.x + 60
             y: recTemp.height - lblLowerTemp.height - txtLowerTemp.height - 20
             text: Math.round(rangeSliderTemp.first.value * 100)>=10?Math.round(rangeSliderTemp.first.value * 100):"0"+Math.round(rangeSliderTemp.first.value * 100)
             font.pixelSize: 40
@@ -123,7 +140,7 @@ Page {
 
         Text {
             id: lblUpperHumid
-            x: recHumid.width * 0.5 - 20
+            x: recTemp.x + 10
             y: 20
             width: 69
             height: 30
@@ -133,7 +150,7 @@ Page {
 
         Text {
             id: txtUpperHumid
-            x: imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
+            x: recTemp.x + 60
             y: 60
             text: Math.round(rangeSliderHumid.second.value * 100)>=10?Math.round(rangeSliderHumid.second.value * 100):"0"+Math.round(rangeSliderHumid.second.value * 100)
             font.pixelSize: 40
@@ -146,11 +163,20 @@ Page {
             second.value: 0.75
             first.value: 0.25
             orientation: Qt.Vertical
+
+            Settings {
+                id: settingRangeHumid
+                fileName: "Settings.dat"
+                category: "Controls"
+                property alias rangeHumidUpperVal: rangeSliderHumid.second.value
+                property alias rangeHumidLowerVal: rangeSliderHumid.first.value
+            }
+
         }
 
         Text {
             id: lblLowerHumid
-            x: recHumid.width * 0.5 - 20
+            x: recTemp.x + 10
             y: recTemp.height - lblLowerTemp.height - 20
             width: 69
             height: 30
@@ -160,7 +186,7 @@ Page {
 
         Text {
             id: txtLowerHumid
-            x: imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
+            x: recTemp.x + 60
             y: recTemp.height - lblLowerTemp.height - txtLowerTemp.height - 20
             text: Math.round(rangeSliderHumid.first.value * 100)>=10?Math.round(rangeSliderHumid.first.value * 100):"0"+Math.round(rangeSliderHumid.first.value * 100)
             font.pixelSize: 40
@@ -187,7 +213,7 @@ Page {
 
         Text {
             id: lblUpperCo2
-            x: recCo2.width * 0.5 - 20
+            x: recTemp.x + 10
             y: 20
             width: 69
             height: 30
@@ -197,7 +223,7 @@ Page {
 
         Text {
             id: txtUpperCo2
-            x: imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
+            x: recTemp.x + 60
             y: 60
             text: Math.round(rangeSliderCo2.second.value * 100)>=10?Math.round(rangeSliderCo2.second.value * 100):"0"+Math.round(rangeSliderCo2.second.value * 100)
             font.pixelSize: 40
@@ -210,11 +236,20 @@ Page {
             second.value: 0.75
             first.value: 0.25
             orientation: Qt.Vertical
+
+            Settings {
+                id: settingRangeCo2
+                fileName: "Settings.dat"
+                category: "Controls"
+                property alias rangeCo2UpperVal: rangeSliderCo2.second.value
+                property alias rangeCo2LowerVal: rangeSliderCo2.first.value
+            }
+
         }
 
         Text {
             id: lblLowerCo2
-            x: recCo2.width * 0.5 - 20
+            x: recTemp.x + 10
             y: recTemp.height - lblLowerTemp.height - 20
             width: 69
             height: 30
@@ -224,7 +259,7 @@ Page {
 
         Text {
             id: txtLowerCo2
-            x: imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
+            x: recTemp.x + 60
             y: recTemp.height - lblLowerTemp.height - txtLowerTemp.height - 20
             text: Math.round(rangeSliderCo2.first.value * 100)>=10?Math.round(rangeSliderCo2.first.value * 100):"0"+Math.round(rangeSliderCo2.first.value * 100)
             font.pixelSize: 40
@@ -251,7 +286,7 @@ Page {
 
         Text {
             id: lblUpperO2
-            x: recO2.width * 0.5 - 20
+            x: recTemp.x + 10
             y: 20
             width: 69
             height: 30
@@ -261,7 +296,7 @@ Page {
 
         Text {
             id: txtUpperO2
-            x: imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
+            x: recTemp.x + 60
             y: 60
             text: Math.round(rangeSliderO2.second.value * 100)>=10?Math.round(rangeSliderO2.second.value * 100):"0"+Math.round(rangeSliderO2.second.value * 100)
             font.pixelSize: 40
@@ -274,11 +309,19 @@ Page {
             second.value: 0.75
             first.value: 0.25
             orientation: Qt.Vertical
+
+            Settings {
+                id: settingRangeO2
+                fileName: "Settings.dat"
+                category: "Controls"
+                property alias rangeO2UpperVal: rangeSliderO2.second.value
+                property alias rangeO2LowerVal: rangeSliderO2.first.value
+            }
         }
 
         Text {
             id: lblLowerO2
-            x: recO2.width * 0.5 - 20
+            x: recTemp.x + 10
             y: recTemp.height - lblLowerTemp.height - 20
             width: 69
             height: 30
@@ -288,7 +331,7 @@ Page {
 
         Text {
             id: txtLowerO2
-            x: imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
+            x: recTemp.x + 60
             y: recTemp.height - lblLowerTemp.height - txtLowerTemp.height - 20
             text: Math.round(rangeSliderO2.first.value * 100)>=10?Math.round(rangeSliderO2.first.value * 100):"0"+Math.round(rangeSliderO2.first.value * 100)
             font.pixelSize: 40
