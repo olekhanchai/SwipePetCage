@@ -9,7 +9,7 @@ ApplicationWindow {
     width: screenWidth
     height: screenHight
     visible: true
-
+    visibility: "FullScreen"
     InputPanel {
         id: inputPanel
         z: 99
@@ -42,7 +42,7 @@ ApplicationWindow {
 
     ColumnLayout {
         x: 0
-        y: 0
+        y: 15
         Row {
             width: parent.width
             height: statusBar.height
@@ -64,12 +64,12 @@ ApplicationWindow {
                    repeat: true
                    onTriggered: {
                        var currentdate = new Date();
-                       var datetime = currentdate.getDate() + "/"
-                                       + (currentdate.getMonth()+1)  + "/"
-                                       + currentdate.getFullYear() + " "
-                                       + currentdate.getHours() + ":"
-                                       + currentdate.getMinutes() + ":"
-                                       + currentdate.getSeconds();
+                       var datetime = String(currentdate.getDate()).padStart(2,'0') + "/"
+                                       + String((currentdate.getMonth()+1)).padStart(2,'0')  + "/"
+                                       + String(currentdate.getFullYear()).padStart(2,'0') + " "
+                                       + String(currentdate.getHours()).padStart(2,'0') + ":"
+                                       + String(currentdate.getMinutes()).padStart(2,'0') + ":"
+                                       + String(currentdate.getSeconds()).padStart(2,'0');
                        lblDateTime.text = datetime;
                    }
                 }
@@ -78,13 +78,13 @@ ApplicationWindow {
             Image {
                 id: claw
                 source: 'images/claw.png'
-                x: parent.width * 0.5 + 20
+                x: parent.width * 0.5 + 17
                 y: (parent.height - claw.height) * 0.5
-                width: 150
-                height: 50
+                width: 120
+                height: 40
                 Label {
                     id: lblName
-                    height: screenHight * 0.1
+                    height: screenHight * 0.1 + 15
                     text: qsTr("Name")
                     font.pixelSize: statusBar.height * 0.2
                     horizontalAlignment: Text.AlignHCenter
@@ -103,7 +103,7 @@ ApplicationWindow {
             Rectangle {
                 x: claw.x + claw.width + 20
                 id: recName
-                y: (parent.height - claw.height) * 0.5 - 10
+                y: -5
                 width: screenWidth / 3
                 height: screenHight * 0.1
                 color: "#64F03C"
@@ -158,7 +158,7 @@ ApplicationWindow {
 
             Text {
                 id: lblCounter
-                height: screenHight * 0.1
+                height: screenHight * 0.1 + 30
                 font.pixelSize: statusBar.height * 0.4
                 anchors.right: parent.right
                 horizontalAlignment: Text.AlignHCenter
@@ -187,6 +187,13 @@ ApplicationWindow {
 
         }
     }
+
+    MouseArea {
+        anchors.fill: parent
+        enabled: false
+        cursorShape: Qt.BlankCursor
+    }
+
     // this function is included locally, but you can also include separately via a header definition
 //    function request(url, callback) {
 //        var xhr = new XMLHttpRequest();

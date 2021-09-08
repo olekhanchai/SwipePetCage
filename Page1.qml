@@ -1,5 +1,5 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick 2.1
+import QtQuick.Controls 2.12
 import Qt.labs.settings 1.1
 
 Page {
@@ -134,50 +134,50 @@ Page {
                 x: (imageTemp.width - lblRGB.width) * 0.5
                 y: neo1.height * 1.5
                 font.family: "Helvetica"
-                font.pointSize: 80
+                font.pointSize: 40
                 text: "RGB"
             }
 
             Label {
                 id: lblRGBDesc
                 x: (imageTemp.width - lblRGBDesc.width) * 0.5
-                y: lblRGB.height + (lblRGBDesc.height * 2)
+                y: lblRGB.height + (lblRGBDesc.height * 2) + 15
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "Select color for neopixel light."
             }
 
             Label {
                 id: lblRgbOff
                 x: imageTemp.width * 0.8 + 20
-                y: lblRGB.height + (lblRGBDesc.height * 2) - 20
+                y: lblRGB.height + (lblRGBDesc.height * 2) - 7
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "-"
             }
 
             Label {
                 id: lblRgbOn
                 x: imageTemp.width * 0.8 + 20
-                y: neo1.height * 1.5
+                y: neo1.height * 1.5 + 3
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "+"
             }
 
             Label {
                 id: lblRgbText
-                x: imageTemp.width * 0.8 + 40
+                x: imageTemp.width * 0.8 + 30
                 y: recRgb.y + recRgb.height + 5
                 font.family: "Helvetica"
-                font.pointSize: 8
+                font.pointSize: 6
                 text: "Brightness"
             }
 
             Image {
                 id: wheelColor
-                x: lblRGB.x - wheelColor.width
-                y: lblRGB.y + neo1.height * 0.55
+                x: lblRGB.x - wheelColor.width - 7
+                y: lblRGB.y + neo1.height * 0.55 - 7
                 width: imageTemp.height * 0.25
                 height: imageTemp.height * 0.25
                 source: "images/wheel.png"
@@ -254,41 +254,41 @@ Page {
                 x: (imageHumid.width - lblIonize.width) * 0.5
                 y: neo1.height * 1.5
                 font.family: "Helvetica"
-                font.pointSize: 80
+                font.pointSize: 40
                 text: "ION"
             }
 
             Label {
                 id: lblIonizeDesc
                 x:  (imageHumid.width - lblIonizeDesc.width) * 0.5
-                y: lblRGB.height + (lblRGBDesc.height * 2)
+                y: lblRGB.height + (lblRGBDesc.height * 2) + 15
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "Turn on/off ionize module."
             }
 
             Label {
                 id: lblIonizeOff
                 x: imageTemp.width * 0.8
-                y: lblRGB.height + (lblIonizeDesc.height * 2) - 20
+                y: lblRGB.height + (lblIonizeDesc.height * 2) - 7
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "Off"
             }
 
             Label {
                 id: lblIonizeOn
                 x: imageTemp.width * 0.8
-                y: neo1.height * 1.5
+                y: neo1.height * 1.5 + 3
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "On"
             }
 
             Image {
                 id: ionic
-                x: lblIonize.x - ionic.width
-                y: lblRGB.y + neo1.height * 0.55
+                x: lblIonize.x - ionic.width - 7
+                y: lblRGB.y + neo1.height * 0.55 - 7
                 width: imageHumid.height * 0.25
                 height: imageHumid.height * 0.25
                 source: "images/ionic.png"
@@ -356,41 +356,41 @@ Page {
                 x: (imageCO2.width - lblUV.width) * 0.5
                 y: neo1.height * 1.5
                 font.family: "Helvetica"
-                font.pointSize: 80
+                font.pointSize: 40
                 text: "UV"
             }
 
             Label {
                 id: lblUVDesc
                 x: (imageCO2.width - lblUVDesc.width) * 0.5
-                y: lblUV.height + (lblRGBDesc.height * 2)
+                y: lblUV.height + (lblRGBDesc.height * 2) + 15
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "Turn on/off UV light."
             }
 
             Label {
                 id: lblUVOff
                 x: imageCO2.width * 0.8
-                y: lblUV.height + (lblUVDesc.height * 2) - 20
+                y: lblUV.height + (lblUVDesc.height * 2) - 7
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "Off"
             }
 
             Label {
                 id: lblUVOn
                 x: imageCO2.width * 0.8
-                y: neo1.height * 1.5
+                y: neo1.height * 1.5 + 3
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "On"
             }
 
             Image {
                 id: uvlight
-                x: lblUV.x - uvlight.width
-                y: lblUV.y + neo1.height * 0.55
+                x: lblUV.x - uvlight.width - 7
+                y: lblUV.y + neo1.height * 0.55 - 7
                 width: imageCO2.height * 0.25
                 height: imageCO2.height * 0.25
                 source: "images/uv.png"
@@ -457,41 +457,41 @@ Page {
                 x: (imageO2.width - lblFan.width) * 0.5
                 y: neo1.height * 1.5
                 font.family: "Helvetica"
-                font.pointSize: 80
+                font.pointSize: 40
                 text: "FAN"
             }
 
             Label {
                 id: lblFanDesc
                 x: (imageO2.width - lblFanDesc.width) * 0.5
-                y: lblFan.height + (lblRGBDesc.height * 2)
+                y: lblFan.height + (lblRGBDesc.height * 2) + 15
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "Turn on/off Fan."
             }
 
             Label {
                 id: lblFanOff
                 x: imageO2.width * 0.8
-                y: lblFan.height + (lblFanDesc.height * 2) - 20
+                y: lblFan.height + (lblFanDesc.height * 2) - 7
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "Off"
             }
 
             Label {
                 id: lblFanOn
                 x: imageO2.width * 0.8
-                y: neo1.height * 1.5
+                y: neo1.height * 1.5 + 3
                 font.family: "Helvetica"
-                font.pointSize: 20
+                font.pointSize: 10
                 text: "On"
             }
 
             Image {
                 id: fan
-                x: lblFan.x - fan.width
-                y: lblUV.y + neo1.height * 0.55
+                x: lblFan.x - fan.width - 7
+                y: lblUV.y + neo1.height * 0.55 - 7
                 width: imageO2.height * 0.25
                 height: imageO2.height * 0.25
                 source: "images/fan.png"

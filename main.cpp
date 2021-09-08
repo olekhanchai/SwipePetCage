@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
     QApplication app(argc, argv);
-
+    QApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
     QQmlApplicationEngine engine;
     QString ipAddress;
 

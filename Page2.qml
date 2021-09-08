@@ -110,6 +110,8 @@ Page {
                         redUp.height = imageTemp.height * 0.25;
                         redUp.x = imageTemp.width * 0.5 + redUp.width * 0.5;
                         redUp.y = imageTemp.height * 0.5 - redUp.height - (redUp.height * 0.5);
+                        targetTemp.text = (parseInt(targetTemp.text)+1)
+                        textTemp.text = "  " + targetTemp.text + " °C"
                     }
                     onReleased: {
                         redUp.source = "file:///" + applicationDirPath + "/images/redup.png"
@@ -143,6 +145,8 @@ Page {
                         redDown.height = imageCO2.height * 0.25;
                         redDown.x = imageCO2.width * 0.5 + redDown.width * 0.5;
                         redDown.y = imageCO2.height * 0.5 + (redDown.height * 0.5);
+                        targetTemp.text = (parseInt(targetTemp.text)-1)
+                        textTemp.text = "  " + targetTemp.text + " °C"
                     }
                     onReleased: {
                         redDown.source = "file:///" + applicationDirPath + "/images/reddown.png"
@@ -256,6 +260,8 @@ Page {
                         blueUp.height = imageCO2.height * 0.25;
                         blueUp.x = imageCO2.width * 0.5 + blueUp.width * 0.5;
                         blueUp.y = imageCO2.height * 0.5 - blueUp.height - (blueUp.height * 0.5);
+                        targetHumid.text = (parseInt(targetHumid.text)+1)
+                        textHumid.text = "  " + targetHumid.text + " %RH"
                     }
                     onReleased: {
                         blueUp.source = "file:///" + applicationDirPath + "/images/blueup.png"
@@ -289,6 +295,8 @@ Page {
                         blueDown.height = imageCO2.height * 0.25;
                         blueDown.x = imageCO2.width * 0.5 + blueDown.width * 0.5;
                         blueDown.y = imageCO2.height * 0.5 + (blueDown.height * 0.5);
+                        targetHumid.text = (parseInt(targetHumid.text)-1)
+                        textHumid.text = "  " + targetHumid.text + " %RH"
                     }
                     onReleased: {
                         blueDown.source = "file:///" + applicationDirPath + "/images/bluedown.png"
@@ -399,6 +407,8 @@ Page {
                         grayUp.height = imageCO2.height * 0.25;
                         grayUp.x = imageCO2.width * 0.5 + grayUp.width * 0.5;
                         grayUp.y = imageCO2.height * 0.5 - grayUp.height - (grayUp.height * 0.5);
+                        targetCO2.text = (parseInt(targetCO2.text)+1)
+                        textCO2.text = "  " + targetCO2.text + " PPM"
                     }
                     onReleased: {
                         grayUp.source = "file:///" + applicationDirPath + "/images/greyup.png"
@@ -432,6 +442,8 @@ Page {
                         grayDown.height = imageCO2.height * 0.25;
                         grayDown.x = imageCO2.width * 0.5 + grayDown.width * 0.5;
                         grayDown.y = imageCO2.height * 0.5 + (grayDown.height * 0.5);
+                        targetCO2.text = (parseInt(targetCO2.text)-1)
+                        textCO2.text = "  " + targetCO2.text + " PPM"
                     }
                     onReleased: {
                         grayDown.source = "file:///" + applicationDirPath + "/images/greydown.png"
@@ -542,6 +554,8 @@ Page {
                         greenUp.height = imageO2.height * 0.25;
                         greenUp.x = imageO2.width * 0.5 + greenUp.width * 0.5;
                         greenUp.y = imageO2.height * 0.5 - greenUp.height - (greenUp.height * 0.5);
+                        targetO2.text = (parseInt(targetO2.text)+1)
+                        textO2.text = "  " + targetO2.text + " %"
                     }
                     onReleased: {
                         greenUp.source = "file:///" + applicationDirPath + "/images/greenup.png"
@@ -575,6 +589,8 @@ Page {
                         greenDown.height = imageO2.height * 0.25;
                         greenDown.x = imageO2.width * 0.5 + greenDown.width * 0.5;
                         greenDown.y = imageO2.height * 0.5 + (greenDown.height * 0.5);
+                        targetO2.text = (parseInt(targetO2.text)-1)
+                        textO2.text = "  " + targetO2.text + " %"
                     }
                     onReleased: {
                         greenDown.source = "file:///" + applicationDirPath + "/images/greendown.png"
@@ -589,6 +605,30 @@ Page {
             }
 
         }
+    }
+
+    Text {
+        id: targetTemp
+        visible: false
+        text: "30"
+    }
+
+    Text {
+        id: targetHumid
+        visible: false
+        text: "60"
+    }
+
+    Text {
+        id: targetCO2
+        visible: false
+        text: "400"
+    }
+
+    Text {
+        id: targetO2
+        visible: false
+        text: "80"
     }
 
     Timer {

@@ -64,21 +64,21 @@ Page {
             width: 69
             height: 30
             text: qsTr("UpperLimit")
-            font.pixelSize: 30
+            font.pixelSize: 15
         }
 
         Text {
             id: txtUpperTemp
-            x:  recTemp.x + 60
+            x:  recTemp.x + 40
             y: 60
             text: Math.round(rangeSliderTemp.second.value * 100)>=10?Math.round(rangeSliderTemp.second.value * 100):"0"+Math.round(rangeSliderTemp.second.value * 100)
-            font.pixelSize: 40
+            font.pixelSize: 20
         }
 
         RangeSlider {
             id: rangeSliderTemp
             x:  imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
-            y:  120
+            y:  20
             second.value: 0.75
             first.value: 0.25
             orientation: Qt.Vertical
@@ -87,8 +87,8 @@ Page {
                 id: settingRangeTemp
                 fileName: "Settings.dat"
                 category: "Controls"
-                property alias rangeTempUpperVal: rangeSliderTemp.second.value
-                property alias rangeTempLowerVal: rangeSliderTemp.first.value
+                //property alias rangeTempUpperVal: rangeSliderTemp.second.value
+                //property alias rangeTempLowerVal: rangeSliderTemp.first.value
             }
 
             Connections {
@@ -109,15 +109,15 @@ Page {
             width: 69
             height: 30
             text: qsTr("LowerLimit")
-            font.pixelSize: 30
+            font.pixelSize: 15
         }
 
         Text {
             id: txtLowerTemp
-            x: recTemp.x + 60
+            x: recTemp.x + 40
             y: recTemp.height - lblLowerTemp.height - txtLowerTemp.height - 20
             text: Math.round(rangeSliderTemp.first.value * 100)>=10?Math.round(rangeSliderTemp.first.value * 100):"0"+Math.round(rangeSliderTemp.first.value * 100)
-            font.pixelSize: 40
+            font.pixelSize: 20
         }
     }
     Rectangle {
@@ -126,7 +126,7 @@ Page {
         y: imageGear.y + imageGear.height + 20
         width: parent.width * 0.25 - 20
         height: parent.height * 0.8
-        color: "#0064FF"
+        color: "#008D96"
 
         Image {
             id: imgHumid
@@ -145,21 +145,21 @@ Page {
             width: 69
             height: 30
             text: qsTr("UpperLimit")
-            font.pixelSize: 30
+            font.pixelSize: 15
         }
 
         Text {
             id: txtUpperHumid
-            x: recTemp.x + 60
+            x: recTemp.x + 40
             y: 60
             text: Math.round(rangeSliderHumid.second.value * 100)>=10?Math.round(rangeSliderHumid.second.value * 100):"0"+Math.round(rangeSliderHumid.second.value * 100)
-            font.pixelSize: 40
+            font.pixelSize: 20
         }
 
         RangeSlider {
             id: rangeSliderHumid
             x:  imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
-            y:  120
+            y:  20
             second.value: 0.75
             first.value: 0.25
             orientation: Qt.Vertical
@@ -168,8 +168,8 @@ Page {
                 id: settingRangeHumid
                 fileName: "Settings.dat"
                 category: "Controls"
-                property alias rangeHumidUpperVal: rangeSliderHumid.second.value
-                property alias rangeHumidLowerVal: rangeSliderHumid.first.value
+                //property alias rangeHumidUpperVal: rangeSliderHumid.second.value
+                //property alias rangeHumidLowerVal: rangeSliderHumid.first.value
             }
 
         }
@@ -181,15 +181,15 @@ Page {
             width: 69
             height: 30
             text: qsTr("LowerLimit")
-            font.pixelSize: 30
+            font.pixelSize: 15
         }
 
         Text {
             id: txtLowerHumid
-            x: recTemp.x + 60
+            x: recTemp.x + 40
             y: recTemp.height - lblLowerTemp.height - txtLowerTemp.height - 20
             text: Math.round(rangeSliderHumid.first.value * 100)>=10?Math.round(rangeSliderHumid.first.value * 100):"0"+Math.round(rangeSliderHumid.first.value * 100)
-            font.pixelSize: 40
+            font.pixelSize: 20
         }
     }
 
@@ -218,21 +218,21 @@ Page {
             width: 69
             height: 30
             text: qsTr("UpperLimit")
-            font.pixelSize: 30
+            font.pixelSize: 15
         }
 
         Text {
             id: txtUpperCo2
-            x: recTemp.x + 60
+            x: recTemp.x + 40
             y: 60
             text: Math.round(rangeSliderCo2.second.value * 100)>=10?Math.round(rangeSliderCo2.second.value * 100):"0"+Math.round(rangeSliderCo2.second.value * 100)
-            font.pixelSize: 40
+            font.pixelSize: 20
         }
 
         RangeSlider {
             id: rangeSliderCo2
             x:  imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
-            y:  120
+            y:  20
             second.value: 0.75
             first.value: 0.25
             orientation: Qt.Vertical
@@ -241,8 +241,9 @@ Page {
                 id: settingRangeCo2
                 fileName: "Settings.dat"
                 category: "Controls"
-                property alias rangeCo2UpperVal: rangeSliderCo2.second.value
-                property alias rangeCo2LowerVal: rangeSliderCo2.first.value
+
+                //property alias rangeCo2UpperVal: rangeSliderCo2.second.value
+                //property alias rangeCo2LowerVal: rangeSliderCo2.first.value
             }
 
         }
@@ -254,15 +255,15 @@ Page {
             width: 69
             height: 30
             text: qsTr("LowerLimit")
-            font.pixelSize: 30
+            font.pixelSize: 15
         }
 
         Text {
             id: txtLowerCo2
-            x: recTemp.x + 60
+            x: recTemp.x + 40
             y: recTemp.height - lblLowerTemp.height - txtLowerTemp.height - 20
             text: Math.round(rangeSliderCo2.first.value * 100)>=10?Math.round(rangeSliderCo2.first.value * 100):"0"+Math.round(rangeSliderCo2.first.value * 100)
-            font.pixelSize: 40
+            font.pixelSize: 20
         }
     }
 
@@ -291,21 +292,21 @@ Page {
             width: 69
             height: 30
             text: qsTr("UpperLimit")
-            font.pixelSize: 30
+            font.pixelSize: 15
         }
 
         Text {
             id: txtUpperO2
-            x: recTemp.x + 60
+            x: recTemp.x + 40
             y: 60
             text: Math.round(rangeSliderO2.second.value * 100)>=10?Math.round(rangeSliderO2.second.value * 100):"0"+Math.round(rangeSliderO2.second.value * 100)
-            font.pixelSize: 40
+            font.pixelSize: 20
         }
 
         RangeSlider {
             id: rangeSliderO2
             x:  imgTemp.width + imgTemp.x + imgTemp.width * 0.8 - 20
-            y:  120
+            y:  20
             second.value: 0.75
             first.value: 0.25
             orientation: Qt.Vertical
@@ -314,8 +315,8 @@ Page {
                 id: settingRangeO2
                 fileName: "Settings.dat"
                 category: "Controls"
-                property alias rangeO2UpperVal: rangeSliderO2.second.value
-                property alias rangeO2LowerVal: rangeSliderO2.first.value
+                //property alias rangeO2UpperVal: rangeSliderO2.second.value
+                //roperty alias rangeO2LowerVal: rangeSliderO2.first.value
             }
         }
 
@@ -326,15 +327,15 @@ Page {
             width: 69
             height: 30
             text: qsTr("LowerLimit")
-            font.pixelSize: 30
+            font.pixelSize: 15
         }
 
         Text {
             id: txtLowerO2
-            x: recTemp.x + 60
+            x: recTemp.x + 40
             y: recTemp.height - lblLowerTemp.height - txtLowerTemp.height - 20
             text: Math.round(rangeSliderO2.first.value * 100)>=10?Math.round(rangeSliderO2.first.value * 100):"0"+Math.round(rangeSliderO2.first.value * 100)
-            font.pixelSize: 40
+            font.pixelSize: 20
         }
     }
 

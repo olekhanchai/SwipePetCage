@@ -55,26 +55,26 @@ Page {
 
         FolderListModel {
             id: folderModel
-            folder: "file:///C:/Qt/"
-            nameFilters: ["*.qml"]
+            folder: "file:///home/pi/Videos/"
+            nameFilters: ["*.mp4"]
         }
 
         Component {
             id: fileDelegate
             Item {
-                width: 300; height: 65
+                width: 300; height: 45
                 Row {
                     Image {
                         id: thumpNail
-                        width: 60
-                        height: 60
+                        width: 30
+                        height: 30
                         source: "images/rgb.jpg"
                         fillMode: Image.Stretch
                     }
                     Text {
-                        text: history.vdoMode?' <b> Video DateTime : </b> ' + fileName:' <b> Image DateTime : </b> ' + fileName
+                        text: history.vdoMode?' <b> </b> ' + fileName:' <b> </b> ' + fileName
                         leftPadding: 20
-                        font.pointSize: 13
+                        font.pointSize: 8
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
@@ -154,9 +154,9 @@ Page {
 
     RoundButton {
         id: btnStreaming
-        width:100
-        height:100
-        x: history.width * 0.645 - lblContrast.width * 0.5 - 50
+        width:80
+        height:80
+        x: history.width * 0.645 - lblContrast.width * 0.5 - 20
         y: sliderSaturation.y + sliderSaturation.height + 30
         text: qsTr("Video")
         onClicked: {
@@ -196,16 +196,16 @@ Page {
     Label {
         id: lblContrast
         text: qsTr("Contrast")
-        x: history.width * 0.775 - lblContrast.width * 0.5 + 40
+        x: history.width * 0.775 - lblContrast.width * 0.5 + 35
         y: sliderBrightness.y - 30
         visible: history.settingVis
     }
 
     RoundButton {
         id: btnSnapShot
-        width:100
-        height:100
-        x: history.width * 0.775 - lblContrast.width * 0.5 - 50
+        width: 80
+        height:80
+        x: history.width * 0.775 - lblContrast.width * 0.5 - 20
         y: sliderSaturation.y + sliderSaturation.height + 30
         text: qsTr("Images")
         onClicked: {
@@ -244,16 +244,16 @@ Page {
     Label {
         id: lblSaturation
         text: qsTr("Saturation")
-        x: history.width * 0.895 - lblContrast.width * 0.5 + 40
+        x: history.width * 0.895 - lblContrast.width * 0.5 + 15
         y: sliderBrightness.y - 30
         visible: history.settingVis
     }
 
     RoundButton {
         id: btnRecVdo
-        width:100
-        height:100
-        x: history.width * 0.895 - lblContrast.width * 0.5 - 50
+        width:80
+        height:80
+        x: history.width * 0.895 - lblContrast.width * 0.5 - 20
         y: sliderSaturation.y + sliderSaturation.height + 30
         text: qsTr("Settings")
         onClicked: {
