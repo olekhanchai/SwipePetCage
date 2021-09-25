@@ -118,6 +118,9 @@ ApplicationWindow {
                         if (event.key === Qt.Key_Return) {
                             inputPanel.active = false;
                             claw.forceActiveFocus();
+                            if (statusTextName.text == "") {
+                                lblCounter.cntUsage = 0;
+                            }
                             setting.sync();
                         }
                     }
@@ -192,6 +195,26 @@ ApplicationWindow {
         anchors.fill: parent
         enabled: false
         cursorShape: Qt.BlankCursor
+    }
+
+    Label {
+        id: curTempValue
+        visible: false
+    }
+
+    Label {
+        id: curHumidValue
+        visible: false
+    }
+
+    Label {
+        id: curO2Value
+        visible: false
+    }
+
+    Label {
+        id: curCo2Value
+        visible: false
     }
 
     // this function is included locally, but you can also include separately via a header definition

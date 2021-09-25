@@ -261,10 +261,10 @@ Page {
 
         onTriggered: {
 
-            var plotYTemp = 25 + Math.random() * 10;
-            var plotYO2 = 20 + Math.random() * 50;
-            var plotYCO2 = 440 + Math.random() * 100;
-            var plotYHumid = 60 + Math.random() * 20;
+            var plotYTemp = parseInt(curTempValue);
+            var plotYO2 = parseInt(curO2Value);
+            var plotYCO2 = parseInt(curCo2Value);
+            var plotYHumid = parseInt(curHumidValue);
 
             var plotX = new Date();
 

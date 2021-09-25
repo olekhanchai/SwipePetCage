@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtCharts 2.3
 import Qt.labs.folderlistmodel 2.2
 import Qt.labs.settings 1.1
+import QtMultimedia 5.11
 
 Page {
     id: history
@@ -261,4 +262,28 @@ Page {
             history.listVis = false;
         }
     }
+
+    Rectangle {
+        x: 100
+        y: 100
+        z: 200
+        width: 400
+        height: 300
+        color: "#FF0000"
+
+        MediaPlayer {
+            id: player
+            source: "file:///home/pi/Videos/BigBunny.mp4"
+            autoPlay: true
+            autoLoad: true
+            loops: 10
+        }
+
+        VideoOutput {
+         source: player
+         anchors.fill: parent
+        }
+
+    }
+
 }

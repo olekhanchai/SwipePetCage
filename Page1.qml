@@ -32,7 +32,7 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        request('http://'+ ipAddress +':8080/command?data=UDYwIFIyNTUgRzAgQjAgVDY0', function (o) {
+                        request('http://'+ ipAddress +'/command.php?data=P60 R255 G0 B0', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
@@ -50,7 +50,7 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        request('http://' + ipAddress + ':8080/command?data=UDYwIFIwIEcyNTUgQjAgVDY0', function (o) {
+                        request('http://'+ ipAddress +'/command.php?data=P60 R0 G255 B0 T64', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
@@ -68,61 +68,7 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        request('http://' + ipAddress + ':8080/command?data=UDYwIFIwIEcwIEIyNTUgVDY0', function (o) {
-                            console.log(o.responseText);
-                            var errorText = '';
-                        });
-                    }
-                }
-            }
-            Rectangle {
-                id: neo7
-                x: 0
-                y: imageTemp.height - neo1.height
-                width: imageTemp.width / 3
-                height: imageTemp.height / 6
-                color: "#C800C8"
-                radius: 10
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        request('http://' + ipAddress + ':8080/command?data=UDYwIFIyMDAgRzAgQjIwMCBUNjQ=', function (o) {
-                            console.log(o.responseText);
-                            var errorText = '';
-                        });
-                    }
-                }
-            }
-            Rectangle {
-                id: neo8
-                x: neo7.width
-                y: imageTemp.height - neo1.height
-                width: imageTemp.width / 3
-                height: imageTemp.height / 6
-                color: "#32E6FF"
-                radius: 10
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        request('http://' + ipAddress + ':8080/command?data=UDYwIFI1MCBHMjMwIEIyNTUgVDY0=', function (o) {
-                            console.log(o.responseText);
-                            var errorText = '';
-                        });
-                    }
-                }
-            }
-            Rectangle {
-                id: neo9
-                x: neo8.width + neo8.x
-                y: imageTemp.height - neo1.height
-                width: imageTemp.width / 3
-                height: imageTemp.height / 6
-                color: "#FF6400"
-                radius: 10
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        request('http://' + ipAddress + ':8080/command?data=UDYwIFIyNTUgRzEwMCBCMCBUNjQ=', function (o) {
+                        request('http://'+ ipAddress +'/command.php?data=P60 R0 G0 B255', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
@@ -148,30 +94,12 @@ Page {
             }
 
             Label {
-                id: lblRgbOff
-                x: imageTemp.width * 0.8 + 20
-                y: lblRGB.height + (lblRGBDesc.height * 2) - 7
+                id: lblRGBCurVal
+                x: imageTemp.width * 0.5 + lblRGB.width
+                y: lblRGB.y + lblRGB.height * 0.5
                 font.family: "Helvetica"
-                font.pointSize: 10
-                text: "-"
-            }
-
-            Label {
-                id: lblRgbOn
-                x: imageTemp.width * 0.8 + 20
-                y: neo1.height * 1.5 + 3
-                font.family: "Helvetica"
-                font.pointSize: 10
-                text: "+"
-            }
-
-            Label {
-                id: lblRgbText
-                x: imageTemp.width * 0.8 + 30
-                y: recRgb.y + recRgb.height + 5
-                font.family: "Helvetica"
-                font.pointSize: 6
-                text: "Brightness"
+                font.pointSize: 18
+                text: sliderRgb.value + "%"
             }
 
             Image {
@@ -182,26 +110,18 @@ Page {
                 height: imageTemp.height * 0.25
                 source: "images/wheel.png"
             }
-            Rectangle {
-                id: recRgb
-                x: imageTemp.width * 0.875 - 2
-                y: neo1.height * 1.7 - 10
-                width: 40
-                height: lblRGB.height + 10
-                color: "#ffffff"
-                radius: 15
-            }
             Slider {
                 id: sliderRgb
-                x: imageTemp.width * 0.875
-                y: neo1.height * 1.7
+                x: neo1.width * 0.5
+                y: lblRGBDesc.y + (lblRGBDesc.height * 0.85)
                 z: 99
                 height: lblRGB.height
-                orientation: Qt.Vertical
+                width: neo1.width * 2
+                orientation: Qt.Horizontal
                 from: 0
                 stepSize: 5
                 live: true
-                to: 50
+                to: 100
                 snapMode: Slider.SnapAlways
 
                 Settings {
@@ -212,27 +132,12 @@ Page {
                 }
 
                 onMoved: {
-                    // Create Base64 Object
-                    var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
-                    var strEncode = 'P60 R'+sliderRgb.value+' G'+sliderRgb.value+' B'+sliderRgb.value+' T64';
-                    request('http://' + ipAddress + ':8080/command?data='+Base64.encode(strEncode), function (o) {
+                    request('http://'+ ipAddress +'/command.php?data=P60 R' + (sliderRgb.value * 2.5) + ' G' + (sliderRgb.value * 2.5) + ' B' + (sliderRgb.value * 2.5), function (o) {
                         console.log(o.responseText);
                         var errorText = '';
                     });
 
                     settingRGB.sync();
-
-//                    if(sliderRgb.value) {
-//                        request('http://192.168.1.49:8080/command?data=UDYwIFIwIFIwIEIwIFQ2NA==', function (o) {
-//                            console.log(o.responseText);
-//                            var errorText = '';
-//                        });
-//                    } else {
-//                        request('http://192.168.1.49:8080/command?data=UDYwIFIyNTUgUjI1NSBCMjU1IFQ2NA==', function (o) {
-//                            console.log(o.responseText);
-//                            var errorText = '';
-//                        });
-//                    }
                 }
             }
 
@@ -240,11 +145,13 @@ Page {
 
         Image {
             id: imageHumid
-            x: grid.width / 2 + 1
+            x: grid.width / 2
+            y: grid.height / 2
+            z: 99
             width: grid.width / 2
             height: grid.height / 2
             anchors.right: parent.right
-            anchors.top: parent.top
+            anchors.bottom: parent.bottom
             anchors.rightMargin: 0
             anchors.topMargin: 0
             source: "images/IONbg.png"
@@ -323,12 +230,12 @@ Page {
 
                 onMoved: {
                     if (sliderIonic.value) {
-                        request('http://' + ipAddress + ':8080/command?data=UDEwIFIxIFMx', function (o) {
+                        request('http://' + ipAddress + '/command.php?data=P10 R2 S0', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
                     } else {
-                        request('http://' + ipAddress + ':8080/command?data=UDEwIFIxIFMw', function (o) {
+                        request('http://' + ipAddress + '/command.php?data=P10 R2 S1', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
@@ -425,12 +332,12 @@ Page {
 
                 onMoved: {
                     if (sliderUV.value) {
-                        request('http://' + ipAddress + ':8080/command?data=UDEwIFIyIFMx', function (o) {
+                        request('http://' + ipAddress + '/command.php?data=P10 R1 S0', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
                     } else {
-                        request('http://' + ipAddress + ':8080/command?data=UDEwIFIyIFMw', function (o) {
+                        request('http://' + ipAddress + '/command.php?data=P10 R1 S1', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
@@ -442,8 +349,8 @@ Page {
 
         Image {
             id: imageO2
-            x: grid.width / 2
-            y: grid.height / 2
+            x: grid.width / 2 + 1
+            y: 0
             width: grid.width / 2
             height: grid.height / 2
             sourceSize.height: 200
@@ -462,6 +369,15 @@ Page {
             }
 
             Label {
+                id: lblFanCurVal
+                x: imageO2.width * 0.5 + lblFan.width
+                y: lblFan.y + lblFan.height * 0.5
+                font.family: "Helvetica"
+                font.pointSize: 18
+                text: sliderFan.value>2?"High":sliderFan.value>1?"Medium":sliderFan.value>0?"Low":"OFF"
+            }
+
+            Label {
                 id: lblFanDesc
                 x: (imageO2.width - lblFanDesc.width) * 0.5
                 y: lblFan.height + (lblRGBDesc.height * 2) + 15
@@ -469,25 +385,6 @@ Page {
                 font.pointSize: 10
                 text: "Turn on/off Fan."
             }
-
-            Label {
-                id: lblFanOff
-                x: imageO2.width * 0.8
-                y: lblFan.height + (lblFanDesc.height * 2) - 7
-                font.family: "Helvetica"
-                font.pointSize: 10
-                text: "Off"
-            }
-
-            Label {
-                id: lblFanOn
-                x: imageO2.width * 0.8
-                y: neo1.height * 1.5 + 3
-                font.family: "Helvetica"
-                font.pointSize: 10
-                text: "On"
-            }
-
             Image {
                 id: fan
                 x: lblFan.x - fan.width - 7
@@ -496,25 +393,18 @@ Page {
                 height: imageO2.height * 0.25
                 source: "images/fan.png"
             }
-            Rectangle {
-                id: recFan
-                x: imageCO2.width * 0.875 - 2
-                y: neo1.height * 1.7 - 10
-                width: 40
-                height: lblRGB.height + 10
-                color: "#ffffff"
-                radius: 15
-            }
             Slider {
                 id: sliderFan
-                x: imageO2.width * 0.875
-                y: neo1.height * 1.7
-                height: lblFan.height
-                orientation: Qt.Vertical
+                x: neo1.width * 0.5
+                y: lblRGBDesc.y + (lblRGBDesc.height * 0.85)
+                z: 99
+                height: lblRGB.height
+                width: neo1.width * 2
+                orientation: Qt.Horizontal
                 from: 0
                 stepSize: 1
                 live: true
-                to: 1
+                to: 3
                 snapMode: Slider.SnapAlways
 
                 Settings {
@@ -526,12 +416,12 @@ Page {
 
                 onMoved: {
                     if (sliderFan.value) {
-                        request('http://' + ipAddress + ':8080/command?data=UDEwIFIzIFMx', function (o) {
+                        request('http://' + ipAddress + '/command.php?data=P10 R3 S0', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
                     } else {
-                        request('http://' + ipAddress + ':8080/command?data=UDEwIFIzIFMw', function (o) {
+                        request('http://' + ipAddress + '/command.php?data=P10 R3 S1', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
