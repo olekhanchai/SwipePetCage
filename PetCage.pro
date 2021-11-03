@@ -1,4 +1,4 @@
-QT += quick opengl charts network multimedia multimediawidgets
+QT += quick opengl charts network webview
 
 CONFIG += c++11
 
