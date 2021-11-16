@@ -650,7 +650,7 @@ Page {
        running: true
        repeat: true
        onTriggered: {
-            request('http://' + ipAddress + '/command.php?data=P40', function (o) {
+            request('http://' + ipAddress + ':5000/scd30', function (o) {
             console.log(o.responseText);
             var errorText = '';
             if(o.responseText.includes("ok")) {

@@ -1,5 +1,5 @@
 import QtQuick 2.1
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.14
 import Qt.labs.settings 1.1
 
 Page {
@@ -27,12 +27,12 @@ Page {
                 y: 0
                 width: imageTemp.width / 3
                 height: imageTemp.height / 6
-                color: "#FF0000"
+                color: "#F0BF06"
                 radius: 10
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        request('http://'+ ipAddress +'/command.php?data=P60 R255 G0 B0', function (o) {
+                        request('http://'+ ipAddress +':5000/neopixel/240/191/96', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
@@ -45,12 +45,12 @@ Page {
                 y: 0
                 width: imageTemp.width / 3
                 height: imageTemp.height / 6
-                color: "#00FF00"
+                color: "#7FFFD4"
                 radius: 10
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        request('http://'+ ipAddress +'/command.php?data=P60 R0 G255 B0 T64', function (o) {
+                        request('http://'+ ipAddress +':5000/neopixel/127/255/212', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
@@ -63,12 +63,12 @@ Page {
                 y: 0
                 width: imageTemp.width / 3
                 height: imageTemp.height / 6
-                color: "#0000FF"
+                color: "#FFFFFF"
                 radius: 10
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        request('http://'+ ipAddress +'/command.php?data=P60 R0 G0 B255', function (o) {
+                        request('http://'+ ipAddress +':5000/neopixel/255/255/255', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
@@ -132,7 +132,7 @@ Page {
                 }
 
                 onMoved: {
-                    request('http://'+ ipAddress +'/command.php?data=P60 R' + (sliderRgb.value * 2.5) + ' G' + (sliderRgb.value * 2.5) + ' B' + (sliderRgb.value * 2.5), function (o) {
+                    request('http://'+ ipAddress +':5000/neopixel/' + (sliderRgb.value * 2.5) + '/' + (sliderRgb.value * 2.5) + '/' + (sliderRgb.value * 2.5), function (o) {
                         console.log(o.responseText);
                         var errorText = '';
                     });
@@ -230,17 +230,35 @@ Page {
 
                 onMoved: {
                     if (sliderIonic.value) {
-                        request('http://' + ipAddress + '/command.php?data=P10 R2 S0', function (o) {
+                        request('http://' + ipAddress + ':5000/relay/2/0', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
                     } else {
-                        request('http://' + ipAddress + '/command.php?data=P10 R2 S1', function (o) {
+                        request('http://' + ipAddress + ':5000/relay/2/1', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
                     }
                     settingIonic.sync();
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (sliderIonic.value) {
+                            sliderIonic.value = 0;
+                            request('http://' + ipAddress + ':5000/relay/2/0', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                        } else {
+                            sliderIonic.value = 1;
+                            request('http://' + ipAddress + ':5000/relay/2/1', function (o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                        }
+                    }
                 }
             }
 
@@ -332,17 +350,35 @@ Page {
 
                 onMoved: {
                     if (sliderUV.value) {
-                        request('http://' + ipAddress + '/command.php?data=P10 R1 S0', function (o) {
+                        request('http://' + ipAddress + ':5000/relay/1/0', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
                     } else {
-                        request('http://' + ipAddress + '/command.php?data=P10 R1 S1', function (o) {
+                        request('http://' + ipAddress + ':5000/relay/1/1', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
                     }
                     settingUV.sync();
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if(sliderUV.value) {
+                            sliderUV.value = 0;
+                            request('http://' + ipAddress + ':5000/relay/1/0', function(o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                        } else {
+                            sliderUV.value = 1;
+                            request('http://' + ipAddress + ':5000/relay/1/1', function(o) {
+                            console.log(o.responseText);
+                            var errorText = '';
+                        });
+                        }
+                    }
                 }
             }
         }
@@ -416,12 +452,12 @@ Page {
 
                 onMoved: {
                     if (sliderFan.value) {
-                        request('http://' + ipAddress + '/command.php?data=P10 R3 S0', function (o) {
+                        request('http://' + ipAddress + ':5000/relay/3/1', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
                     } else {
-                        request('http://' + ipAddress + '/command.php?data=P10 R3 S1', function (o) {
+                        request('http://' + ipAddress + ':5000/relay/3/0', function (o) {
                             console.log(o.responseText);
                             var errorText = '';
                         });
